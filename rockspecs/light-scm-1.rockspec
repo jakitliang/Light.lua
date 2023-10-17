@@ -2,7 +2,7 @@ package = "Light"
 version = "scm-1"
 
 source = {
-  url = "https://github.com/jakitliang/Light.git",
+  url = "git://github.com/jakitliang/Light.git",
 }
 
 description = {
