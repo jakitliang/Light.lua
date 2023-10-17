@@ -1,9 +1,9 @@
 
-local Object = require('core.object')
-local Socket = require('socket')
-local TCPChannel = require('core.network.channel.tcp_channel')
-local EventWorker = require('core.worker.event_worker')
-local Log = require('core.log')
+local Object = require('light.object')
+local Socket = require('light.socket')
+local TCPChannel = require('light.network.channel.tcp_channel')
+local EventWorker = require('light.worker.event_worker')
+local Log = require('light.log')
 
 --- @class TCPServerChannel : TCPChannel, EventWorker
 --- @field host string

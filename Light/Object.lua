@@ -11,14 +11,17 @@
 --- 3. Object(proto); # Create object and inherit from proto <br>
 --- 4. Object(proto, {...}); # Create object with table {...} and inherit from proto
 --- @class Object
+--- @field proto Object
 --- @overload fun(proto: table|Object|function, table: table|function|Object):any
 --- @overload fun(proto: table|function|Object):any
 --- @overload fun(table: table):any
 --- @overload fun():any
 local Object = {}
 
+local ObjectMetatable = {__cache = false}
+
 --- Constructor of the object
-function Object:new()
+function Object:new(...)
   -- fallback call
 end
 
@@ -72,7 +75,36 @@ function Object.clone(self)
   return setmetatable(object, getmetatable(self))
 end
 
-local ObjectMetatable = {__cache = false}
+--- Create new object with prototype
+--- @generic T
+--- @param self T
+--- @param ... any
+--- @return T
+function Object.create(self, ...)
+  if self == Object then
+    local proto, object = ...
+
+    if proto then
+      if not rawget(proto, '__proto') then
+        proto, object = Object, proto
+      end
+
+      object = object or {}
+      --- @diagnostic disable-next-line: param-type-mismatch
+      rawset(object, '__proto', proto)
+      --- @diagnostic disable-next-line: param-type-mismatch
+      setmetatable(object, ObjectMetatable)
+      return object
+    end
+  end
+
+  local constructor = self.new or Object.new
+  local object = {__proto = self}
+
+  setmetatable(object, ObjectMetatable)
+  constructor(object, ...)
+  return object
+end
 
 function ObjectMetatable.__index(self, key, check)
   if self == Object then
@@ -127,29 +159,7 @@ function ObjectMetatable.__index(self, key, check)
 end
 
 function ObjectMetatable.__call(self, ...)
-  if self == Object then
-    local proto, object = ...
-
-    if proto then
-      if not rawget(proto, '__proto') then
-        proto, object = Object, proto
-      end
-
-      object = object or {}
-      --- @diagnostic disable-next-line: param-type-mismatch
-      rawset(object, '__proto', proto)
-      --- @diagnostic disable-next-line: param-type-mismatch
-      setmetatable(object, ObjectMetatable)
-      return object
-    end
-  end
-
-  local constructor = self.new
-  local object = {__proto = self}
-
-  setmetatable(object, ObjectMetatable)
-  constructor(object, ...)
-  return object
+  return Object.create(self, ...)
 end
 
 function ObjectMetatable.__newindex(self, key, value)

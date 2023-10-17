@@ -5,8 +5,8 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('core.object')
-local Device = require('core.record.device')
+local Object = require('light.object')
+local Device = require('light.record.device')
 local SQLite = require('lsqlite3')
 
 local SQLiteDevice = Object(Device)

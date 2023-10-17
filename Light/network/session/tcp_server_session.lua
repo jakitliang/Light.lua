@@ -1,8 +1,8 @@
 
-local Object = require('core.object')
-local TCPSession = require('core.network.session.tcp_session')
-local TCPServerChannel = require('core.network.channel.tcp_server_channel')
-local Log = require('core.log')
+local Object = require('light.object')
+local TCPSession = require('light.network.session.tcp_session')
+local TCPServerChannel = require('light.network.channel.tcp_server_channel')
+local Log = require('light.log')
 
 --- @class TCPServerSession : TCPSession, TCPServerChannelDelegate
 --- @field channel TCPServerChannel

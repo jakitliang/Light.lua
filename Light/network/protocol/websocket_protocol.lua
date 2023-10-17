@@ -9,8 +9,8 @@
 -- require('compat53')
 -- require('love.data')
 
-local Object = require('core.object')
-local Protocol = require('core.network.protocol')
+local Object = require('light.object')
+local Protocol = require('light.network.protocol')
 local ParseStatus = Protocol.ParseStatus
 ---@diagnostic disable-next-line: deprecated
 local Pack = string.pack or function (...) return love.data.pack('string', ...) end
@@ -19,7 +19,7 @@ local Unpack = string.unpack or function (...) return love.data.unpack(...) end
 local bnot = bit.bnot
 local band, bor, bxor = bit.band, bit.bor, bit.bxor
 local lshift, rshift, rol = bit.lshift, bit.rshift, bit.rol
-local Log = require('core.log')
+local Log = require('light.log')
 
 local ParseState = {
   PARSE_OPERATION = ParseStatus.BEGIN,

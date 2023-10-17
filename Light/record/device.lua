@@ -5,7 +5,7 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('core.object')
+local Object = require('light.object')
 
 --- @class Device
 local Device = Object()

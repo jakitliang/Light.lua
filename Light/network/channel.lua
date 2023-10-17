@@ -5,9 +5,9 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('core.object')
-local EventWorker = require('core.worker.event_worker')
-local Log = require('core.log')
+local Object = require('light.object')
+local EventWorker = require('light.worker.event_worker')
+local Log = require('light.log')
 
 --- @class Channel : EventWorkerDelegate
 --- @field io any

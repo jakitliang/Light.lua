@@ -5,10 +5,10 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('core.object')
-local Protocol = require('core.network.protocol')
+local Object = require('light.object')
+local Protocol = require('light.network.protocol')
 local ParseStatus = Protocol.ParseStatus
-local Log = require('core.log')
+local Log = require('light.log')
 
 --- @class HttpProtocol : Protocol
 --- @field headers table<string, string>

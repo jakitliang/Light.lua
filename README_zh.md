@@ -1,31 +1,27 @@
-# Light.lua
+# 灯.lua
 
-> If I were the shore, bright &amp; magnanimous.
+> 若我即是彼方，光明坦荡
 
-The goal of `Light` is Lua's universal standard library, integrated design.
+`灯` 的目标是 Lua 的通用标准库，一体化设计，类似于 C++ 的 STL，为 Lua 开发者们提供基础设施。
 
-Which similar to C++'s STL, providing base infrastructure for Lua developers.
+### 简介
 
-## Introduction
+`灯` 目前有 6 个模块：
 
-`Light` currently has 6 modules:
+- **对象** 提供面向原型的编程基础类
+- **记录** 提供 ORM 基础能力
+- **协作** 提供协程与事件机
+- **日志** 提供基本日志输出
+- **套接** 提供跨平台的套接字功能，与少量加解密方法。
+- **网络** 提供 Http 与 WebSocket 网络通信能力，和 TCP 基础能力。
 
-- **Object** provides prototype-oriented programming basic classes
-- **Record** Provides ORM basic capabilities
-- **Worker** Provides coroutines and event machines
-- **Log** Provides basic log output
-- **Socket** Provides cross-platform socket functionality and a small number of encryption and decryption methods.
-- **Network** Provides Http and WebSocket network communication capabilities, and TCP basic capabilities.
-
-## Object
+## 对象
 
 > light.object -> Object
 
-Designed with a Linked List like structure that is most suitable for the Lua language.
+以最适合 Lua 语言的链式结构设计，提供高性能的方法调用与 JavaScript 同类特征特性。
 
-It provides high-performance method calling and similar features to JavaScript.
-
-Sample:
+示例代码：
 
 ```lua
 local Base = Object()
@@ -62,13 +58,13 @@ print(d:instanceOf(Base))    -- Will print "true"
 print(d.proto == Base)       -- Will print "true"
 ```
 
-## Record
+## 记录
 
 > light.record -> Record
 
-The logging module provides the most basic log output.
+记录日志模块，提供最基本日志输出。
 
-Sample:
+示例代码：
 
 ```lua
 local u = Users()
@@ -87,35 +83,33 @@ Users:find({ -- Search
 })
 ```
 
-### Device
+### 设备
 
 > light.device -> Device
 
-The device provides a scalable interface to facilitate users to access other data storage.
-
-User can implemented their own DBC interface as a driver.
+设备提供可扩展性的接口，方便用户接入其它数据存储 DBC 接口实现为驱动
 
 ## 协作
 
 > light.worker -> Worker
 
-An interface class implemented based on `Lua` coroutine `rotoutine` and combined with `light.Object`
+以 `Lua` 协程 `rotoutine` 为基础结合 `对象.lua` 实现的接口类
 
 用户可
 
-### Event Worker
+### 事件机
 
 > light.worker.event_worker -> EventWorker
 
-The Event Worker (also Event Machine) was implemented using the cross-platform socket `light.socket`.
+以跨平台套接字 `light.socket` 结合 **协程** 实现的协作类。
 
-Equivalent to `libevent` and `libuv`, provides asynchronous event handling for IO.
+等同于 `libevent` 和 `libuv`，提供用于 IO 异步事件处理。
 
-## Log
+## 日志
 
 > light.log -> Log
 
-Sample:
+示例代码：
 
 ```lua
 Log.level = Log.Level.DEBUG
@@ -126,9 +120,9 @@ Log:error('error')
 Log:debug('debug')
 ```
 
-## Socket
+## 套接
 
-Provides cross-platform socket support:
+提供跨平台的套接字支持：
 
 - Windows
 - Linux
@@ -139,7 +133,7 @@ Provides cross-platform socket support:
 
 > light.socket.TCP -> TCP
 
-Sample:
+示例代码：
 
 ```lua
 local s = light.socket.TCP()
@@ -150,15 +144,15 @@ s:connect('localhost', 8080)
 
 > light.socket.UDP -> UDP
 
-**UDP said it will coming soon**
+**尽快提供 UDP 方面的支持**
 
 ### Base64
 
-#### encode
+#### 加密
 
 > light.socket.base64encode -> fun(string)
 
-#### decode
+#### 解密
 
 > light.socket.base64decode -> fun(string)
 
@@ -170,53 +164,45 @@ s:connect('localhost', 8080)
 
 > light.socket.sha1hex -> fun(string)
 
-## Network
+## 网络
 
-### Channel
+### 频道
 
-#### TCPChannel
+#### TCP 频道
 
 > light.network.channel.tcp_channel -> TCPChannel
 
-TCP channel is the most basic TCP message sending pipe.
-
-Users can operate in the following ways:
+TCP 频道为最基本的 TCP 消息发送管道，用户可通过下列方式操作：
 
 - TCPChannel:connect('host', port)
-- TCPChannel:connectNow('host', port) -- NonBlock
+- TCPChannel:connectNow('host', port) -- 非阻塞连接
 - TCPChannel:read(1024)
-- TCPChannel:readNow(1024) - NonBlock
+- TCPChannel:readNow(1024) - 非阻塞读
 - TCPChannel:write('buffer', 6)
-- TCPChannel:writeNow('buffer', 6) - NonBlock
+- TCPChannel:writeNow('buffer', 6) - 非阻塞写
 - TCPChannel:close()
 
-#### TCPServerChannel
+#### TCP 服务频道
 
 > light.network.channel.tcp_server_channel -> TCPServerChannel
 
-TCP channel is a pipe for TCP service application.
-
-Users can operate in the following ways:
+TCP 频道为 TCP 服务类应用的管道，用户可通过下列方式操作：
 
 - TCPChannel:accept()
-- TCPChannel:acceptNow() -- NonBlock
+- TCPChannel:acceptNow() -- 非阻塞接纳
 - TCPChannel:close()
 
-### Protocol
+### 协议
 
 > light.protocol
 
-Protocol is the interface for data **serialization** and **deserialization**.
+基于状态机的数据交换协议分析接口，支持 **序列化** 以及 **反序列化**
 
-It is state machine-based designed so users should obey to the encode and decode state.
-
-#### HttpProtocol
+#### HTTP 1.1 协议
 
 > light.network.protocol.http_protocol -> HttpProtocol
 
-Implemented the standard HTTP 1.1 protocol encode and decode.
-
-Providing status information attributes:
+按 Http 1.1 协议标准实现，提供状态信息属性：
 
 - statusCode
 - statusMessage
@@ -225,52 +211,44 @@ Providing status information attributes:
 - headers
 - content
 
-And also MIME：
+提供 MIME 类：
 
 > HttpProtocol.MIME
 
-#### WebSocketProtocol
+#### WebSocket 13 协议
 
 > light.network.protocol.websocket_protocol -> WebsocketProtocol
 
-A WebSocketProtocol codec.
-
-Provide status information attributes:
+按 WebSocket 13 协议标准实现，提供状态信息属性：
 
 - fin
 - mask
-- masking
+- masking -- 掩码
 - length
-- payload -- Message entity is here
+- payload -- 消息主体
 - ...
 
-### Session
+### 会话
 
-The session was implement with **event machine** so IO is asynchronized.
+会话使用 **基于协程** 的 **事件机** 实现 IO 异步，并提供委托 `delegate` 接口与 函数接口便于用户使用。
 
-Would provides `delegate` interface and function interface.
-
-Using function interface is more easy.
-
-#### TCPSession
+#### TCP 会话
 
 > light.network.session.tcp_session -> TCPSession
 
-#### TCPServerSession
+#### TCP 服务会话
 
 > light.network.session.tcp_server_session -> TCPServerSession
 
-#### HttpSession
+#### Http WebSocket 聚合会话
 
 > light.network.session.http_session -> HttpSession
 
-This client classes a fusion of HttpSession and WebSocketSession
+提供 Http 与 WebSocket 聚合的客户端类
 
-You can handle those message in one.
+用户可直接使用，通过设置委托 `delegate` 回调即可快速建立 **基于事件** 的客户端应用
 
-Users can use it directly and quickly build **event-based** client applications by setting the `delegate` or a callback funtion.
-
-Sample:
+示例代码：
 
 ```lua
 local HttpSession = require('light.network.session.http_session')
@@ -315,15 +293,13 @@ while true do
 end
 ```
 
-#### HttpServerSession
+#### Http WebSocket 聚合服务会话
 
 > light.network.session.http_server_session -> HttpServerSession
 
 使用 Http WebSocket 聚合服务会话可快速开发 高性能后端类 应用。
 
-There is also a fusion of HttpServerSession and WebSocketServerSession lol.
-
-You can easily using it with a callback like below:
+示例代码：
 
 ```lua
 local Log = require('light.log')
@@ -346,8 +322,9 @@ while true do
 end
 ```
 
-## License
+## 版权
 
-This module is BSD-Licensed
+此模块以 `BSD 2-Clause License` 协议发行，请遵守规矩！
 
-Written by Jakit Liang
+著作权归 **Jakit Liang 泊凛** 所有
+

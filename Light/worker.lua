@@ -5,8 +5,8 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('core.object')
-local Socket = require('socket')
+local Object = require('light.object')
+local Socket = require('light.socket')
 
 --- @class Worker : Object
 local Worker = {}

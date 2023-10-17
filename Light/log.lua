@@ -1,5 +1,5 @@
 
-local Object = require('core.object')
+local Object = require('light.object')
 
 local LogLevel = {
   INFO = 1,

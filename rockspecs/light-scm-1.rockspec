@@ -16,9 +16,46 @@ dependencies = {
   "lua >= 5.1"
 }
 
+local function MakeModule(platform)
+  local modules = {
+    ['light.socket'] = {
+      defines = {},
+      sources = {
+        "light/network/socket/src/base64.c",
+        "light/network/socket/src/error_number.cpp",
+        "light/network/socket/src/sha1.c",
+        "light/network/socket/src/socket.cpp",
+      },
+      incdirs = {"light/network/socket/include", "light/network/socket/src"},
+      libraries = {},
+      ['build.variables'] = {
+        CC = "clang-cl",
+        CXXFLAGS = "/Wocaocaocao",
+      },
+    },
+  }
+  local ret = {
+    modules = modules,
+  }
+  if platform == "windows" then
+    modules['light.socket'].sources[#modules['light.socket'].sources + 1] = "light/network/socket/src/socket_mswin.cpp"
+    modules['light.socket'].libraries = {"ws2_32"}
+  else
+    modules['light.socket'].sources[#modules['light.socket'].sources + 1] = "light/network/socket/src/socket_posix.cpp"
+  end
+
+  return ret
+end
+
 build = {
   modules = {
     ['Light.Object'] = 'Light/Object.lua',
+  },
+  platforms = {
+    unix = MakeModule('unix'),
+    macosx = MakeModule('macosx'),
+    windows = MakeModule("windows"),
+    mingw64 = MakeModule('mingw64'),
   },
   type = 'builtin'
 }

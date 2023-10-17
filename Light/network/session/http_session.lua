@@ -5,15 +5,15 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('core.object')
+local Object = require('light.object')
 local Socket = require('socket')
-local TCPSession = require('core.network.session.tcp_session')
-local HttpProtocol = require('core.network.protocol.http_protocol')
+local TCPSession = require('light.network.session.tcp_session')
+local HttpProtocol = require('light.network.protocol.http_protocol')
 local HttpMethod = HttpProtocol.HttpMethod
 local HttpStatus = HttpProtocol.HttpStatus
 local HttpMIME = HttpProtocol.HttpMIME
-local WebSocketProtocol = require('core.network.protocol.websocket_protocol')
-local Log = require('core.log')
+local WebSocketProtocol = require('light.network.protocol.websocket_protocol')
+local Log = require('light.log')
 
 --- @class HttpSession : TCPSession
 --- @field delegate HttpSessionDelegate|fun(...):nil|Protocol

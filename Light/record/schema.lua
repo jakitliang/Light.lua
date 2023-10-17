@@ -5,8 +5,8 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('core.object')
-local Field = require('core.record.field')
+local Object = require('light.object')
+local Field = require('light.record.field')
 
 --- @class Schema : table
 local Schema = Object()
