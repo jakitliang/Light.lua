@@ -40,6 +40,6 @@ luac.out
 *.hex
 
 # Useless files
-.sublime-workspace
+*.sublime-workspace
 .DS_Store
 desktop.ini
