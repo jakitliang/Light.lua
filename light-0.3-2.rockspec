@@ -1,5 +1,5 @@
 package = "Light"
-version = "0.3-1"
+version = "0.3-2"
 
 source = {
   url = "git://github.com/jakitliang/Light.git",
@@ -13,7 +13,8 @@ description = {
 }
 
 dependencies = {
-  "lua >= 5.1"
+  "lua >= 5.1",
+  "compat53 >= 0.7-1",
 }
 
 build = {
