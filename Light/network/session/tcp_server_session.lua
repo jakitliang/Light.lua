@@ -1,3 +1,9 @@
+--- Light.lua
+--- Light up your way to the internet
+--- @module 'TCPServerSession'
+--- @author Jakit Liang 泊凛
+--- @date 2023-10-16
+--- @license MIT
 
 local Object = require('light.object')
 local TCPSession = require('light.network.session.tcp_session')
