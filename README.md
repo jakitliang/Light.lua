@@ -95,13 +95,11 @@ The device provides a scalable interface to facilitate users to access other dat
 
 User can implemented their own DBC interface as a driver.
 
-## 协作
+## Worker
 
 > light.worker -> Worker
 
 An interface class implemented based on `Lua` coroutine `rotoutine` and combined with `light.Object`
-
-用户可
 
 ### Event Worker
 
@@ -319,11 +317,9 @@ end
 
 > light.network.session.http_server_session -> HttpServerSession
 
-使用 Http WebSocket 聚合服务会话可快速开发 高性能后端类 应用。
-
 There is also a fusion of HttpServerSession and WebSocketServerSession lol.
 
-You can easily using it with a callback like below:
+You can easily start a event-driven server with a callback like below:
 
 ```lua
 local Log = require('light.log')
