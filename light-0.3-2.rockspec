@@ -2,7 +2,7 @@ package = "Light"
 version = "0.3-2"
 
 source = {
-  url = "git://github.com/jakitliang/Light.git",
+  url = "git@github.com:jakitliang/Light.lua.git",
 }
 
 description = {
