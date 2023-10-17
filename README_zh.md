@@ -62,7 +62,9 @@ print(d.proto == Base)       -- Will print "true"
 
 > light.record -> Record
 
-记录日志模块，提供最基本日志输出。
+记录是 数据库的 ORM 模块，充当 MVC / MVVM 当中 Model 的角色
+
+使用 Record 即可获得跟 `SQLAlchemy` 或 `ActiveRecord` 同等特性。
 
 示例代码：
 

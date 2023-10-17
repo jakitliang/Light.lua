@@ -66,7 +66,9 @@ print(d.proto == Base)       -- Will print "true"
 
 > light.record -> Record
 
-The logging module provides the most basic log output.
+Record is the ORM module of the database, who's the role of Model in MVC / MVVM.
+
+Record take you the features equivalent to `SQLAlchemy` or `ActiveRecord` in `Lua`.
 
 Sample:
 
