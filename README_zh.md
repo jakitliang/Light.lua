@@ -85,23 +85,27 @@ print(d.proto == Base)       -- Will print "true"
 
 使用 Record 即可获得跟 `SQLAlchemy` 或 `ActiveRecord` 同等特性。
 
-示例代码：
+简而言之，**记录** 是个数据库的 **增删改查** 库
+
+增删改查示例：
 
 ```lua
-local u = Users()
+local u = Users() -- 创建条目
 u.name = 'demo'..i
 u.age = i
 print('User.save', u, u:save(), u.id)
 
-u:save() -- Save
+u:save() -- 增：写入条目
 
-u:update() -- Change, Modify
-
-u:destroy() -- Delete
-
-Users:find({ -- Search
+local found = Users:findOne({ -- 查：根据条件查找
   id = 1
 })
+
+found.age = 100
+
+found:update() -- 改：提交修改
+
+found:destroy() -- 删：删除条目
 ```
 
 ### 设备

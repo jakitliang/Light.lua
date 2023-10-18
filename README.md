@@ -87,6 +87,8 @@ Record is the ORM module of the database, who's the role of Model in MVC / MVVM.
 
 Record take you the features equivalent to `SQLAlchemy` or `ActiveRecord` in `Lua`.
 
+In brief, `Record` does the **CRUD** things of database.
+
 Sample:
 
 ```lua
