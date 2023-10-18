@@ -22,7 +22,7 @@ luac.out
 *.a
 *.la
 *.lo
-*.def
+#*.def
 *.exp
 
 # Shared objects (inc. Windows DLLs)
