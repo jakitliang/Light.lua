@@ -1,0 +1,64 @@
+# Copyright (c) 2023 Jakit Liang 泊凛
+# This software is released under the BSD 2-Clause License.
+# https://github.com/jakitliang/Light.lua/LICENSE
+
+#CPPFLAGS = /I$(LUA_INCDIR) /Isrc /Iinclude /D_CRT_SECURE_NO_WARNINGS
+#CXXFLAGS = $(CFLAGS) /W3 /EHsc
+
+OBJS = \
+	light\socket\src\base64.obj \
+	light\socket\src\error_number.obj \
+	light\socket\src\sha1.obj \
+	light\socket\src\socket.obj \
+	light\socket\src\socket_mswin.obj
+
+TARGET = socket.dll
+
+all: $(TARGET)
+
+clean:
+	del $(OBJS) $(TARGET)
+
+install:
+# 	xcopy "light/log.lua" "$(LUA_DIR)/light/log.lua"
+# 	mkdir "$(LUA_DIR)/worker"
+# 	xcopy "light/worker.lua" "$(LUA_DIR)/light/worker.lua"
+# 	xcopy "light/worker/event_worker.lua" "$(LUA_DIR)/light/worker/event_worker.lua"
+# 	mkdir "$(LUA_DIR)/network"
+# 	xcopy "light/network/channel.lua" "$(LUA_DIR)/light/network/channel.lua"
+# 	xcopy "light/network/protocol.lua" "$(LUA_DIR)/light/network/protocol.lua"
+# 	xcopy "light/network/session.lua" "$(LUA_DIR)/light/network/session.lua"
+# 	mkdir "$(LUA_DIR)/channel"
+# 	xcopy "light/network/channel/tcp_channel.lua" "$(LUA_DIR)/light/network/channel/tcp_channel.lua"
+# 	xcopy "light/network/channel/tcp_server_channel.lua" "$(LUA_DIR)/light/network/channel/tcp_server_channel.lua"
+# 	mkdir "$(LUA_DIR)/protocol"
+# 	xcopy "light/network/protocol/http_protocol.lua" "$(LUA_DIR)/light/network/protocol/http_protocol.lua"
+# 	xcopy "light/network/protocol/websocket_protocol.lua" "$(LUA_DIR)/light/network/protocol/websocket_protocol.lua"
+# 	mkdir "$(LUA_DIR)/session"
+# 	xcopy "light/network/session/http_server_session.lua" "$(LUA_DIR)/light/network/session/http_server_session.lua"
+# 	xcopy "light/network/session/http_session.lua" "$(LUA_DIR)/light/network/session/http_session.lua"
+# 	xcopy "light/network/session/tcp_server_session.lua" "$(LUA_DIR)/light/network/session/tcp_server_session.lua"
+# 	xcopy "light/network/session/tcp_session.lua" "$(LUA_DIR)/light/network/session/tcp_session.lua"
+# 	xcopy "light/record.lua" "$(LUA_DIR)/light/record.lua"
+# 	mkdir "$(LUA_DIR)/record"
+# 	xcopy "light/record/device.lua" "$(LUA_DIR)/light/record/device.lua"
+# 	mkdir "$(LUA_DIR)/device"
+# 	xcopy "light/record/device/sqlite_device.lua" "$(LUA_DIR)/light/record/device/sqlite_device.lua"
+# 	xcopy "light/record/field.lua" "$(LUA_DIR)/light/record/field.lua"
+# 	xcopy "light/record/query.lua" "$(LUA_DIR)/light/record/query.lua"
+# 	xcopy "light/record/schema.lua" "$(LUA_DIR)/light/record/schema.lua"
+
+#uninstall:
+#	rd /s /q "$(LIBDIR)"\light\version
+
+$(TARGET): $(OBJS)
+	link $(LIBFLAG) /DEF:socket.def $** $(LUA_LIBDIR)\$(LUALIB) WS2_32.Lib /NODEFAULTLIB:LIBCMT.LIB /OUT:$@
+
+.c.obj:
+	$(CC) $(CFLAGS) /Fo$@ /c $<
+
+.cpp.obj:
+	$(CC) $(CPPFLAGS) /Fo$@ /c $<
+
+#.cxx.obj:
+#	$(CC) $(CFLAGS) $(CXXFLAGS) /Fo$@ /c $<

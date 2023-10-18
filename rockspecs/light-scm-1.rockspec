@@ -18,7 +18,22 @@ dependencies = {
 
 local function MakeModule(platform)
   local modules = {
-    ['light.socket'] = {
+    ['light.object'] = 'light/object.lua',
+    ['light.log'] = 'light/log.lua',
+    ['light.worker'] = 'light/worker.lua',
+    ['light.worker.event_worker'] = 'light/worker/event_worker.lua',
+    ['light.network.channel'] = 'light/network/channel.lua',
+    ['light.network.protocol'] = 'light/network/protocol.lua',
+    ['light.network.session'] = 'light/network/session.lua',
+    ['light.network.channel.tcp_channel'] = 'light/network/channel/tcp_channel.lua',
+    ['light.network.channel.tcp_server_channel'] = 'light/network/channel/tcp_server_channel.lua',
+    ['light.network.protocol.http_protocol'] = 'light/network/protocol/http_protocol.lua',
+    ['light.network.protocol.websocket_protocol'] = 'light/network/protocol/websocket_protocol.lua',
+    ['light.network.session.http_server_session'] = 'light/network/session/http_server_session.lua',
+    ['light.network.session.http_session'] = 'light/network/session/http_session.lua',
+    ['light.network.session.tcp_server_session'] = 'light/network/session/tcp_server_session.lua',
+    ['light.network.session.tcp_session'] = 'light/network/session/tcp_session.lua',
+    ['light.network.socket'] = {
       defines = {},
       sources = {
         "light/network/socket/src/base64.c",
@@ -28,11 +43,14 @@ local function MakeModule(platform)
       },
       incdirs = {"light/network/socket/include", "light/network/socket/src"},
       libraries = {},
-      ['build.variables'] = {
-        CC = "clang-cl",
-        CXXFLAGS = "/Wocaocaocao",
-      },
+      ['build.variables'] = {},
     },
+    ['light.record'] = 'light/record.lua',
+    ['light.record.device'] = 'light/record/device.lua',
+    ['light.record.device.sqlite_device'] = 'light/record/device/sqlite_device.lua',
+    ['light.record.field'] = 'light/record/field.lua',
+    ['light.record.query'] = 'light/record/query.lua',
+    ['light.record.schema'] = 'light/record/schema.lua'
   }
   local ret = {
     modules = modules,
