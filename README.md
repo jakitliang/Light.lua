@@ -17,6 +17,23 @@ Which similar to C++'s STL, providing base infrastructure for Lua developers.
 - **Socket** Provides cross-platform socket functionality and a small number of encryption and decryption methods.
 - **Network** Provides Http and WebSocket network communication capabilities, and TCP basic capabilities.
 
+## Installation
+
+> luarocks install Light
+
+### Dependency
+
+#### SQLite3
+
+> luarocks install lsqlite3
+
+`light.record` is base on `lsqlite3` but it is not automatically installed.
+
+So You need to install SQLite3:
+
+- `apt get install libsqlite3-dev` in `ubuntu` linux.
+- On windows, you should build SQLite3 with source code or download one prebuilt binary.
+
 ## Object
 
 > light.object -> Object

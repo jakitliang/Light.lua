@@ -15,6 +15,25 @@
 - **套接** 提供跨平台的套接字功能，与少量加解密方法。
 - **网络** 提供 Http 与 WebSocket 网络通信能力，和 TCP 基础能力。
 
+## 安装
+
+> luarocks install Light
+
+### 依赖库
+
+#### SQLite3
+
+> luarocks install lsqlite3
+
+面向数据库读写的 **记录** 模块 `light.record` 基于 `lsqlite3` 但不会自动安装它.
+
+您可以通过上面的命令安装，但安装时会提示您 系统要先装一个 SQLite3
+
+所以，系统层安装 SQLite3 数据库可以这样:
+
+- 在 Ubuntu 系统上命令 `apt get install libsqlite3-dev` 安装.
+- Windows 系统, 您可以找个别人编好的的包，或者自己拉 SQLite3 源码自己用 Visual Studio 编译.
+
 ## 对象
 
 > light.object -> Object
