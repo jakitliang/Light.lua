@@ -395,6 +395,42 @@ MyClass.DataType = DataType -- 首字大写驼峰命名，对象静态属性
 C:/name_space_a/name_space_b/...
 ```
 
+#### 类
+
+> 类文件名 以驼峰形式
+
+这是 `MyClass.lua` 类:
+
+```lua
+local MyClass = {}
+
+function MyClass:new( ... )
+  -- body
+end
+
+return MyClass
+```
+
+#### 模块
+
+> 模块就是 没有类，纯粹的 `table` 放一些工具函数
+
+这是 `my_module.lua` 模块：
+
+```lua
+local my_module = {}
+
+my_module.TestCallA = function ( ... ) -- 工具方法会导出，所以大驼峰
+  -- body
+end
+
+function my_module.TestCallB( ... ) -- 同上
+  -- body
+end
+
+return my_module
+```
+
 ### 函数
 
 局部函数：

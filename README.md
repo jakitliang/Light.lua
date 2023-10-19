@@ -411,6 +411,38 @@ MyClass.DataType = DataType -- CamelCase
 C:/name_space_a/name_space_b/...
 ```
 
+#### Class
+
+This is `MyClass.lua`:
+
+```lua
+local MyClass = {}
+
+function MyClass:new( ... )
+  -- body
+end
+
+return MyClass
+```
+
+#### Module
+
+This is `my_module.lua`
+
+```lua
+local my_module = {}
+
+my_module.TestCallA = function ( ... ) -- Utils should export, so CamelCase
+  -- body
+end
+
+function my_module.TestCallB( ... ) -- Same
+  -- body
+end
+
+return my_module
+```
+
 ### Function
 
 local function:
