@@ -36,13 +36,15 @@
 
 ## 对象
 
-> light.object -> Object
+> light.Object -> Object
 
 以最适合 Lua 语言的链式结构设计，提供高性能的方法调用与 JavaScript 同类特征特性。
 
 示例代码：
 
 ```lua
+local Object = require('light.Object')
+
 local Base = Object()
 
 -- Tips:
@@ -79,7 +81,7 @@ print(d.proto == Base)       -- Will print "true"
 
 ## 记录
 
-> light.record -> Record
+> light.Record -> Record
 
 记录是 数据库的 ORM 模块，充当 MVC / MVVM 当中 Model 的角色
 
@@ -110,13 +112,13 @@ found:destroy() -- 删：删除条目
 
 ### 设备
 
-> light.device -> Device
+> light.Device -> Device
 
 设备提供可扩展性的接口，方便用户接入其它数据存储 DBC 接口实现为驱动
 
 ## 协作
 
-> light.worker -> Worker
+> light.Worker -> Worker
 
 以 `Lua` 协程 `rotoutine` 为基础结合 `对象.lua` 实现的接口类
 
@@ -124,7 +126,7 @@ found:destroy() -- 删：删除条目
 
 ### 事件机
 
-> light.worker.event_worker -> EventWorker
+> light.worker.EventWorker -> EventWorker
 
 以跨平台套接字 `light.socket` 结合 **协程** 实现的协作类。
 
@@ -132,7 +134,7 @@ found:destroy() -- 删：删除条目
 
 ## 日志
 
-> light.log -> Log
+> light.Log -> Log
 
 示例代码：
 
@@ -195,7 +197,7 @@ s:connect('localhost', 8080)
 
 #### TCP 频道
 
-> light.network.channel.tcp_channel -> TCPChannel
+> light.network.channel.TCPChannel -> TCPChannel
 
 TCP 频道为最基本的 TCP 消息发送管道，用户可通过下列方式操作：
 
@@ -209,7 +211,7 @@ TCP 频道为最基本的 TCP 消息发送管道，用户可通过下列方式�
 
 #### TCP 服务频道
 
-> light.network.channel.tcp_server_channel -> TCPServerChannel
+> light.network.channel.TCPServerChannel -> TCPServerChannel
 
 TCP 频道为 TCP 服务类应用的管道，用户可通过下列方式操作：
 
@@ -225,7 +227,7 @@ TCP 频道为 TCP 服务类应用的管道，用户可通过下列方式操作�
 
 #### HTTP 1.1 协议
 
-> light.network.protocol.http_protocol -> HttpProtocol
+> light.network.protocol.HttpProtocol -> HttpProtocol
 
 按 Http 1.1 协议标准实现，提供状态信息属性：
 
@@ -242,7 +244,7 @@ TCP 频道为 TCP 服务类应用的管道，用户可通过下列方式操作�
 
 #### WebSocket 13 协议
 
-> light.network.protocol.websocket_protocol -> WebsocketProtocol
+> light.network.protocol.WebsocketProtocol -> WebsocketProtocol
 
 按 WebSocket 13 协议标准实现，提供状态信息属性：
 
@@ -259,15 +261,15 @@ TCP 频道为 TCP 服务类应用的管道，用户可通过下列方式操作�
 
 #### TCP 会话
 
-> light.network.session.tcp_session -> TCPSession
+> light.network.session.TCPSession -> TCPSession
 
 #### TCP 服务会话
 
-> light.network.session.tcp_server_session -> TCPServerSession
+> light.network.session.TCPServerSession -> TCPServerSession
 
 #### Http WebSocket 聚合会话
 
-> light.network.session.http_session -> HttpSession
+> light.network.session.HttpSession -> HttpSession
 
 提供 Http 与 WebSocket 聚合的客户端类
 
@@ -276,8 +278,8 @@ TCP 频道为 TCP 服务类应用的管道，用户可通过下列方式操作�
 示例代码：
 
 ```lua
-local HttpSession = require('light.network.session.http_session')
-local WebSocketProtocol = require('light.network.protocol.websocket_protocol')
+local HttpSession = require('light.network.session.HttpSession')
+local WebSocketProtocol = require('light.network.protocol.WebSocketProtocol')
 
 local s = HttpSession('127.0.0.1', 8080, function (action, ...)
   print('action:', action)
@@ -320,7 +322,7 @@ end
 
 #### Http WebSocket 聚合服务会话
 
-> light.network.session.http_server_session -> HttpServerSession
+> light.network.session.HttpServerSession -> HttpServerSession
 
 使用 Http WebSocket 聚合服务会话可快速开发 高性能后端类 应用。
 
@@ -329,7 +331,7 @@ end
 ```lua
 local Log = require('light.log')
 
-local HttpServerSession = require('light.network.session.http_server_session')
+local HttpServerSession = require('light.network.session.HttpServerSession')
 
 local s = HttpServerSession('127.0.0.1', 3001, 200, function (action, ...)
   -- print('action:', action)

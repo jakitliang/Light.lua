@@ -36,7 +36,7 @@ So You need to install SQLite3:
 
 ## Object
 
-> light.object -> Object
+> light.Object -> Object
 
 Designed with a Linked List like structure that is most suitable for the Lua language.
 
@@ -45,6 +45,8 @@ It provides high-performance method calling and similar features to JavaScript.
 Sample:
 
 ```lua
+local Object = require('light.Object')
+
 local Base = Object()
 
 -- Tips:
@@ -81,7 +83,7 @@ print(d.proto == Base)       -- Will print "true"
 
 ## Record
 
-> light.record -> Record
+> light.Record -> Record
 
 Record is the ORM module of the database, who's the role of Model in MVC / MVVM.
 
@@ -110,7 +112,7 @@ Users:find({ -- Search
 
 ### Device
 
-> light.device -> Device
+> light.Device -> Device
 
 The device provides a scalable interface to facilitate users to access other data storage.
 
@@ -118,13 +120,13 @@ User can implemented their own DBC interface as a driver.
 
 ## Worker
 
-> light.worker -> Worker
+> light.Worker -> Worker
 
 An interface class implemented based on `Lua` coroutine `rotoutine` and combined with `light.Object`
 
 ### Event Worker
 
-> light.worker.event_worker -> EventWorker
+> light.worker.EventWorker -> EventWorker
 
 The Event Worker (also Event Machine) was implemented using the cross-platform socket `light.socket`.
 
@@ -132,7 +134,7 @@ Equivalent to `libevent` and `libuv`, provides asynchronous event handling for I
 
 ## Log
 
-> light.log -> Log
+> light.Log -> Log
 
 Sample:
 
@@ -195,7 +197,7 @@ s:connect('localhost', 8080)
 
 #### TCPChannel
 
-> light.network.channel.tcp_channel -> TCPChannel
+> light.network.channel.TCPChannel -> TCPChannel
 
 TCP channel is the most basic TCP message sending pipe.
 
@@ -211,7 +213,7 @@ Users can operate in the following ways:
 
 #### TCPServerChannel
 
-> light.network.channel.tcp_server_channel -> TCPServerChannel
+> light.network.channel.TCPServerChannel -> TCPServerChannel
 
 TCP channel is a pipe for TCP service application.
 
@@ -223,7 +225,7 @@ Users can operate in the following ways:
 
 ### Protocol
 
-> light.protocol
+> light.Protocol -> Protocol
 
 Protocol is the interface for data **serialization** and **deserialization**.
 
@@ -231,7 +233,7 @@ It is state machine-based designed so users should obey to the encode and decode
 
 #### HttpProtocol
 
-> light.network.protocol.http_protocol -> HttpProtocol
+> light.network.protocol.HttpProtocol -> HttpProtocol
 
 Implemented the standard HTTP 1.1 protocol encode and decode.
 
@@ -250,7 +252,7 @@ And also MIME：
 
 #### WebSocketProtocol
 
-> light.network.protocol.websocket_protocol -> WebsocketProtocol
+> light.network.protocol.WebsocketProtocol -> WebsocketProtocol
 
 A WebSocketProtocol codec.
 
@@ -273,15 +275,15 @@ Using function interface is more easy.
 
 #### TCPSession
 
-> light.network.session.tcp_session -> TCPSession
+> light.network.session.TCPSession -> TCPSession
 
 #### TCPServerSession
 
-> light.network.session.tcp_server_session -> TCPServerSession
+> light.network.session.TCPServerSession -> TCPServerSession
 
 #### HttpSession
 
-> light.network.session.http_session -> HttpSession
+> light.network.session.HttpSession -> HttpSession
 
 This client classes a fusion of HttpSession and WebSocketSession
 
@@ -292,8 +294,8 @@ Users can use it directly and quickly build **event-based** client applications 
 Sample:
 
 ```lua
-local HttpSession = require('light.network.session.http_session')
-local WebSocketProtocol = require('light.network.protocol.websocket_protocol')
+local HttpSession = require('light.network.session.HttpSession')
+local WebSocketProtocol = require('light.network.protocol.WebSocketProtocol')
 
 local s = HttpSession('127.0.0.1', 8080, function (action, ...)
   print('action:', action)
@@ -343,9 +345,9 @@ There is also a fusion of HttpServerSession and WebSocketServerSession lol.
 You can easily start a event-driven server with a callback like below:
 
 ```lua
-local Log = require('light.log')
+local Log = require('light.Log')
 
-local HttpServerSession = require('light.network.session.http_server_session')
+local HttpServerSession = require('light.network.session.HttpServerSession')
 
 local s = HttpServerSession('127.0.0.1', 3001, 200, function (action, ...)
   -- print('action:', action)
