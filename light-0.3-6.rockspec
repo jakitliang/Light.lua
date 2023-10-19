@@ -1,5 +1,5 @@
 package = "Light"
-version = "0.3-5"
+version = "0.3-6"
 
 source = {
   url = "git://github.com/jakitliang/Light.git",
