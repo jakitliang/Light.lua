@@ -1,8 +1,10 @@
 
 io.stdout:setvbuf('no')
 
-local HttpSession = require('light.network.session.http_session')
-local WebSocketProtocol = require('light.network.protocol.websocket_protocol')
+package.path = "..\\?.lua;" .. "" .. package.path
+
+local HttpSession = require('light.network.session.HttpSession')
+local WebSocketProtocol = require('light.network.protocol.WebSocketProtocol')
 
 local s = HttpSession('127.0.0.1', 8080, function (action, ...)
   print('action:', action)

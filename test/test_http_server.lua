@@ -3,10 +3,10 @@ io.stdout:setvbuf('no')
 
 package.path = "..\\?.lua;" .. "" .. package.path
 
-local Log = require('light.log')
+local Log = require('light.Log')
 Log.level = Log.Level.DEBUG
 
-local HttpServerSession = require('light.network.session.http_server_session')
+local HttpServerSession = require('light.network.session.HttpServerSession')
 
 local s = HttpServerSession('127.0.0.1', 3001, 200, function (action, ...)
   -- print('action:', action)

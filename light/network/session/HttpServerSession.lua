@@ -5,11 +5,11 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('light.object')
-local TCPServerSession = require('light.network.session.tcp_server_session')
-local HttpSession = require('light.network.session.http_session')
+local Object = require('light.Object')
+local TCPServerSession = require('light.network.session.TCPServerSession')
+local HttpSession = require('light.network.session.HttpSession')
 local HttpSessionDelegate = HttpSession.Delegate
-local Log = require('light.log')
+local Log = require('light.Log')
 
 --- @class HttpServerSession : TCPServerSession
 --- @field clients TCPChannel[]

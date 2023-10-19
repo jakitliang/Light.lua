@@ -5,10 +5,10 @@
 --- @date 2023-10-16
 --- @license MIT
 
-local Object = require('light.object')
-local TCPSession = require('light.network.session.tcp_session')
-local TCPServerChannel = require('light.network.channel.tcp_server_channel')
-local Log = require('light.log')
+local Object = require('light.Object')
+local TCPSession = require('light.network.session.TCPSession')
+local TCPServerChannel = require('light.network.channel.TCPServerChannel')
+local Log = require('light.Log')
 
 --- @class TCPServerSession : TCPSession, TCPServerChannelDelegate
 --- @field channel TCPServerChannel

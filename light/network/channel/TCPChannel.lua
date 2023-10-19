@@ -5,11 +5,11 @@
 --- @date 2023-10-16
 --- @license MIT
 
-local Object = require('light.object')
+local Object = require('light.Object')
 local Socket = require('light.socket')
-local Channel = require('light.network.channel')
-local EventWorker = require('light.worker.event_worker')
-local Log = require('light.log')
+local Channel = require('light.network.Channel')
+local EventWorker = require('light.worker.EventWorker')
+local Log = require('light.Log')
 
 --- TCPChannel is used to create TCP socket connection<br>
 --- Default is blocking. For async usage should have delegate given

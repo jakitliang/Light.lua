@@ -5,7 +5,7 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('light.object')
+local Object = require('light.Object')
 
 --- @class Field
 --- @field integer string

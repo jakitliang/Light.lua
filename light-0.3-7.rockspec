@@ -1,12 +1,12 @@
 package = "Light"
-version = "0.3-6"
+version = "0.3-7"
 
 source = {
   url = "git://github.com/jakitliang/Light.git",
 }
 
 description = {
-  summary = "If I were the other shore, bright & magnanimous.",
+  summary = "If I were the shore, bright & magnanimous.",
   homepage = "https://github.com/jakitliang/Light",
   license = "BSD 2-Clause License",
   detailed = "Framework of everything"

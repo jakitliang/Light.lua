@@ -5,9 +5,9 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('light.object')
+local Object = require('light.Object')
 local Socket = require('light.socket')
-local Worker = require('light.worker')
+local Worker = require('light.Worker')
 local Log = require('light.log')
 local band, bor, bxor, bnot = bit.band, bit.bor, bit.bxor, bit.bnot
 

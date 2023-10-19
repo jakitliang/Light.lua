@@ -5,10 +5,10 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('light.object')
-local Field = require('light.record.field')
-local Schema = require('light.record.schema')
-local Query = require('light.record.query')
+local Object = require('light.Object')
+local Field = require('light.record.Field')
+local Schema = require('light.record.Schema')
+local Query = require('light.record.Query')
 
 --- Provide Record
 --- @class Record : Object

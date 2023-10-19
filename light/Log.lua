@@ -5,7 +5,7 @@
 --- @date 2023-10-16
 --- @license MIT
 
-local Object = require('light.object')
+local Object = require('light.Object')
 
 local LogLevel = {
   INFO = 1,

@@ -5,11 +5,11 @@
 --- @date 2023-10-16
 --- @license MIT
 
-local Object = require('light.object')
+local Object = require('light.Object')
 local Socket = require('light.socket')
-local TCPChannel = require('light.network.channel.tcp_channel')
-local EventWorker = require('light.worker.event_worker')
-local Log = require('light.log')
+local TCPChannel = require('light.network.channel.TCPChannel')
+local EventWorker = require('light.worker.EventWorker')
+local Log = require('light.Log')
 
 --- @class TCPServerChannel : TCPChannel, EventWorker
 --- @field host string

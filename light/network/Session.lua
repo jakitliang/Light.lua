@@ -5,9 +5,9 @@
 --- @date 2023-09-16
 --- @license MIT
 
-local Object = require('light.object')
-local EventWorker = require('light.worker.event_worker')
-local Log = require('light.log')
+local Object = require('light.Object')
+local EventWorker = require('light.worker.EventWorker')
+local Log = require('light.Log')
 
 --- @class Session : Object
 --- @field channel Channel
