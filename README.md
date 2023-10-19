@@ -365,6 +365,78 @@ while true do
 end
 ```
 
+## Code Style Guide
+
+### Variables
+
+```lua
+local var_name = 123 -- snake_case, good
+
+local varName = 123 -- camelCase, normal
+```
+
+### Class / Type
+
+```lua
+-- Enumeration
+local DataType = {
+  TEXT,  
+  NUMBER,
+  TEXT_AND_NUMBER
+}
+
+local MyClass = {} -- CamelCase
+
+function MyClass:new()
+  self.dataSize = 123 -- CamelCase，object attributes
+end
+
+function MyClass:getData( ... ) -- camelCase，object methods
+  -- body
+end
+
+function MyClass:StaticMethod( ... ) -- CamelCase, static method
+  -- body
+end
+
+-- Static attribute
+MyClass.DataType = DataType -- CamelCase
+```
+
+### Package (Namespace)
+
+> Package or namespace is the folder directory
+
+```
+C:/name_space_a/name_space_b/...
+```
+
+### Function
+
+local function:
+
+```lua
+local function my_function() -- local, not export
+  -- code
+end
+
+local function MyFunction() -- local, exprot
+  -- code
+end
+
+return {
+  MyFunction = MyFunction -- export
+}
+```
+
+static global function：
+
+```lua
+function MyFunction()
+  -- code
+end
+```
+
 ## License
 
 This module is BSD-Licensed

@@ -349,6 +349,78 @@ while true do
 end
 ```
 
+## 命名规范
+
+### 变量
+
+```lua
+local var_name = 123 -- 小写
+
+local varName = 123 -- 小写
+```
+
+### 类型
+
+```lua
+-- 枚举
+local DataType = {
+  TEXT,  
+  NUMBER,
+  TEXT_AND_NUMBER
+}
+
+local MyClass = {} -- 大写
+
+function MyClass:new()
+  self.dataSize = 123 -- 驼峰命名，对象属性
+end
+
+function MyClass:getData( ... ) -- 驼峰命名，对象方法
+  -- body
+end
+
+function MyClass:StaticMethod( ... ) -- 首字大写驼峰命名，静态方法
+  -- body
+end
+
+-- 静态属性
+MyClass.DataType = DataType -- 首字大写驼峰命名，对象静态属性
+```
+
+### 包（命名空间）
+
+> 包就是 目录，理解上为 命名空间
+
+```
+C:/name_space_a/name_space_b/...
+```
+
+### 函数
+
+局部函数：
+
+```lua
+local function my_function() -- 局部函数，不暴露不导出，小写
+  -- code
+end
+
+local function MyFunction() -- 局部函数，导出，大驼峰
+  -- code
+end
+
+return {
+  MyFunction = MyFunction
+}
+```
+
+全局函数：
+
+```lua
+function MyFunction() -- 全局静态函数，大驼峰
+  -- code
+end
+```
+
 ## 版权
 
 此模块以 `BSD 2-Clause License` 协议发行，请遵守规矩！
