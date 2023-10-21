@@ -366,6 +366,89 @@ while true do
 end
 ```
 
+## Graphic
+
+The graphics library requires you to additionally install Love2d and configure the environment.
+
+Deployment method:
+
+The least thought-provoking way is to directly download the non-installation version, unzip it, drag all the executable files and dlls inside to the root directory, and start it.
+
+Run it: `D:\path...\love.exe .`
+
+### Basic
+
+#### Plane Vector
+
+> light.graphics.Vector2
+
+Includes `x` and `y` axis
+
+#### 三维向量
+
+> light.graphics.Vector3
+
+Includes `x`、 `y` and `z` axis
+
+#### 四维向量
+
+> light.graphics.Vector4
+
+Includes `x`、 `y`、 `z` and `w` axis
+
+#### Font Management
+
+> light.graphics.FontManager
+
+To load fonts, and use fonts
+
+- Load：`FontManager['font name'] = 'path/to/file.ttf'`
+- Using：`local font = FontManager['font name'][12 size]`
+
+#### UI Event
+
+> light.graphics.Event
+
+To bind UI view events, such as clicks `onMouseUp`
+
+Interface `EventDelegate` is need to be implement
+
+### Layers
+
+#### Canvas Layer
+
+> light.graphics.layer.CanvasLayer
+
+Something like iOS `CALayer`，is used to painting
+
+#### Image Layer
+
+> light.graphics.layer.ImageLayer
+
+Load your photo and pictures
+
+#### Text Layer
+
+> light.graphics.layer.TextLayer
+
+Text layer that supports multi-color display:
+
+`"#RI'm Red,#YI'm yellow"`
+
+### Views (Control)
+
+#### Button
+
+> light.graphics.view.ButtonView
+
+The button control
+
+#### Label
+
+> light.graphics.layer.LabelView
+
+Label control, and its font can be set as you like
+
 ## Code Style Guide
 
 ### Variables
