@@ -1,5 +1,5 @@
 package = "Light"
-version = "0.3-7"
+version = "0.3-8"
 
 source = {
   url = "git://github.com/jakitliang/Light.git",
@@ -33,6 +33,25 @@ local function MakeModule(platform)
     ['light.network.session.HttpSession'] = 'light/network/session/HttpSession.lua',
     ['light.network.session.TCPServerSession'] = 'light/network/session/TCPServerSession.lua',
     ['light.network.session.TCPSession'] = 'light/network/session/TCPSession.lua',
+    ['light.Record'] = 'light/Record.lua',
+    ['light.record.Device'] = 'light/record/Device.lua',
+    ['light.record.device.SQLiteDevice'] = 'light/record/device/SQLiteDevice.lua',
+    ['light.record.Field'] = 'light/record/Field.lua',
+    ['light.record.Query'] = 'light/record/Query.lua',
+    ['light.record.Schema'] = 'light/record/Schema.lua',
+    ['light.graphics.Event'] = 'light/graphics/Event.lua',
+    ['light.graphics.FontManager'] = 'light/graphics/FontManager.lua',
+    ['light.graphics.Layer'] = 'light/graphics/Layer.lua',
+    ['light.graphics.layer.CanvasLayer'] = 'light/graphics/layer/CanvasLayer.lua',
+    ['light.graphics.layer.ImageLayer'] = 'light/graphics/layer/ImageLayer.lua',
+    ['light.graphics.layer.TextLayer'] = 'light/graphics/layer/TextLayer.lua',
+    ['light.graphics.Source'] = 'light/graphics/Source.lua',
+    ['light.graphics.Vector2'] = 'light/graphics/Vector2.lua',
+    ['light.graphics.Vector3'] = 'light/graphics/Vector3.lua',
+    ['light.graphics.Vector4'] = 'light/graphics/Vector4.lua',
+    ['light.graphics.View'] = 'light/graphics/View.lua',
+    ['light.graphics.view.ButtonView'] = 'light/graphics/view/ButtonView.lua',
+    ['light.graphics.View.LabelView'] = 'light/graphics/view/LabelView.lua',
     ['light.network.socket'] = {
       defines = {},
       sources = {
@@ -45,12 +64,6 @@ local function MakeModule(platform)
       incdirs = {"light/network/socket/include", "light/network/socket/src"},
       libraries = {},
     },
-    ['light.Record'] = 'light/Record.lua',
-    ['light.record.Device'] = 'light/record/Device.lua',
-    ['light.record.device.SQLiteDevice'] = 'light/record/device/SQLiteDevice.lua',
-    ['light.record.Field'] = 'light/record/Field.lua',
-    ['light.record.Query'] = 'light/record/Query.lua',
-    ['light.record.Schema'] = 'light/record/Schema.lua'
   }
 
   return {modules = modules}
@@ -103,7 +116,20 @@ local platforms = {
         ['light.record.device.SQLiteDevice'] = 'light/record/device/SQLiteDevice.lua',
         ['light.record.Field'] = 'light/record/Field.lua',
         ['light.record.Query'] = 'light/record/Query.lua',
-        ['light.record.Schema'] = 'light/record/Schema.lua'
+        ['light.record.Schema'] = 'light/record/Schema.lua',
+        ['light.graphics.Event'] = 'light/graphics/Event.lua',
+        ['light.graphics.FontManager'] = 'light/graphics/FontManager.lua',
+        ['light.graphics.Layer'] = 'light/graphics/Layer.lua',
+        ['light.graphics.layer.CanvasLayer'] = 'light/graphics/layer/CanvasLayer.lua',
+        ['light.graphics.layer.ImageLayer'] = 'light/graphics/layer/ImageLayer.lua',
+        ['light.graphics.layer.TextLayer'] = 'light/graphics/layer/TextLayer.lua',
+        ['light.graphics.Source'] = 'light/graphics/Source.lua',
+        ['light.graphics.Vector2'] = 'light/graphics/Vector2.lua',
+        ['light.graphics.Vector3'] = 'light/graphics/Vector3.lua',
+        ['light.graphics.Vector4'] = 'light/graphics/Vector4.lua',
+        ['light.graphics.View'] = 'light/graphics/View.lua',
+        ['light.graphics.view.ButtonView'] = 'light/graphics/view/ButtonView.lua',
+        ['light.graphics.View.LabelView'] = 'light/graphics/view/LabelView.lua',
       },
     },
   },

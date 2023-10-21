@@ -2,9 +2,9 @@
 
 > If I were the shore, bright &amp; magnanimous.
 
-The goal of `Light` is Lua's universal standard library, integrated design.
+The goal of `Light` is to become the **FULL STACK** library in `Lua`.
 
-Which similar to C++'s STL, providing base infrastructure for Lua developers.
+You make everything with it, such like Mobile Apps, PC games, and Web backend, etc.
 
 ## Introduction
 
@@ -16,6 +16,7 @@ Which similar to C++'s STL, providing base infrastructure for Lua developers.
 - **Log** Provides basic log output
 - **Socket** Provides cross-platform socket functionality and a small number of encryption and decryption methods.
 - **Network** Provides Http and WebSocket network communication capabilities, and TCP basic capabilities.
+- **Graphics** Privides Love2d compatible UI components.
 
 ## Installation
 

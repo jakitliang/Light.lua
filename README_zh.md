@@ -14,6 +14,7 @@
 - **日志** 提供基本日志输出
 - **套接** 提供跨平台的套接字功能，与少量加解密方法。
 - **网络** 提供 Http 与 WebSocket 网络通信能力，和 TCP 基础能力。
+- **图形** 提供与 Love2d 兼容的图形 API，开发跨平台移动与桌面应用，甚至娱乐游戏。
 
 ## 安装
 
@@ -348,6 +349,88 @@ while true do
   s:resume() -- Polling
 end
 ```
+
+## 图形
+
+图形库 需要你额外 安装 Love2d 并布置环境。
+
+部署方式：
+
+最不用思考的方式是 直接下载 非安装版本，解压，把里面的可执行文件与 dll、 全部拖到根目录，即可启动。
+
+`D:\路径...\love.exe .` 注意尾巴是 空格 + `.`（点）
+
+
+### 基本
+
+#### 平面向量
+
+> light.graphics.Vector2
+
+包含 `x` 和 `y` 坐标
+
+#### 三维向量
+
+> light.graphics.Vector3
+
+包含 `x`、 `y` 和 `z` 坐标
+
+#### 四维向量
+
+> light.graphics.Vector4
+
+包含 `x`、 `y`、 `z` 以及 `w` 坐标
+
+#### 字体管理
+
+> light.graphics.FontManager
+
+用于加载字体，使用字体
+
+- 加载：`FontManager['字体名称'] = '字体路径'`
+- 使用：`local font = FontManager['字体名称'][字号]`
+
+#### UI 事件
+
+> light.graphics.Event
+
+用于绑定 UI 视图事件，例如点击 `onMouseUp`
+
+须实现接口 `EventDelegate`
+
+### 图层
+
+#### 画布图层
+
+> light.graphics.layer.CanvasLayer
+
+类似于 iOS `CALayer`，用于作图
+
+#### 图像图层
+
+> light.graphics.layer.ImageLayer
+
+加载图片与展示
+
+#### 文本图层
+
+> light.graphics.layer.TextLayer
+
+支持多色彩显示的文本图层
+
+### 控件
+
+#### 按钮
+
+> light.graphics.view.ButtonView
+
+按钮控件
+
+#### 标签
+
+> light.graphics.layer.LabelView
+
+标签控件，可设置字体
 
 ## 命名规范
 

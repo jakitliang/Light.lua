@@ -14,6 +14,9 @@ local s = HttpServerSession('127.0.0.1', 3001, 200, function (action, ...)
     --- @type HttpSession, HttpProtocol, HttpProtocol
     local self, input, output = ...
     return output
+
+  elseif action == 'onWebSocket' then
+    -- 业务逻辑
   end
 
   return nil
