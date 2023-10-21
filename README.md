@@ -384,13 +384,13 @@ Run it: `D:\path...\love.exe .`
 
 Includes `x` and `y` axis
 
-#### 三维向量
+#### 3D Vector
 
 > light.graphics.Vector3
 
 Includes `x`、 `y` and `z` axis
 
-#### 四维向量
+#### Quad Vector
 
 > light.graphics.Vector4
 
