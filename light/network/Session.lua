@@ -18,6 +18,7 @@ local Session = {}
 function Session:new(channel)
   self.channel = channel
   self.queue = {}
+  self.isFinished = false
 end
 
 function Session:enqueue(size)

@@ -132,7 +132,8 @@ function HttpSession:onReadHttp(channel, input, output)
   end
 
   if connection == 'close' then
-    channel:shutdown(0)
+    output.headers['connection'] = connection
+    self.isFinished = true
   end
 
   -- output.headers['content-type'] = HttpMIME.HTML
@@ -200,7 +201,7 @@ function HttpSession:completion(channel, count)
     end
   end
 
-  if channel:isShutdown() ~= -1 then
+  if self.isFinished then
     channel:close()
   end
 end
