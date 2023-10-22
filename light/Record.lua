@@ -10,7 +10,8 @@ local Field = require('light.record.Field')
 local Schema = require('light.record.Schema')
 local Query = require('light.record.Query')
 
---- Provide Record
+--- Record.lua <br/>
+--- Easy Record Your CRUD Life!
 --- @class Record : Object
 --- @field device Device
 --- @field schema Schema

@@ -55,11 +55,11 @@ local function MakeModule(platform)
     ['light.network.socket'] = {
       defines = {},
       sources = {
-        "light/network/socket/src/base64.c",
-        "light/network/socket/src/error_number.cpp",
-        "light/network/socket/src/sha1.c",
-        "light/network/socket/src/socket.cpp",
-        "light/network/socket/src/socket_posix.cpp"
+        "light/socket/src/base64.c",
+        "light/socket/src/error_number.cpp",
+        "light/socket/src/sha1.c",
+        "light/socket/src/socket.cpp",
+        "light/socket/src/socket_posix.cpp"
       },
       incdirs = {"light/network/socket/include", "light/network/socket/src"},
       libraries = {},
