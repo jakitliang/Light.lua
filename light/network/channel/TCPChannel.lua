@@ -177,6 +177,16 @@ function TCPChannel:getAddress()
 end
 
 function TCPChannel:shutdown(how)
+  if how == 0 then
+    EventWorker:remove(self, 'r')
+
+  elseif how == 1 then
+    EventWorker:remove(self, 'w')
+
+  elseif how == 2 then
+    EventWorker:remove(self, 'a')
+  end
+
   self.io:shutdown(how)
 end
 
