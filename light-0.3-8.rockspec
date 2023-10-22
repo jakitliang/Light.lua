@@ -61,7 +61,7 @@ local function MakeModule(platform)
         "light/socket/src/socket.cpp",
         "light/socket/src/socket_posix.cpp"
       },
-      incdirs = {"light/network/socket/include", "light/network/socket/src"},
+      incdirs = {"light/socket/include", "light/socket/src"},
       libraries = {},
     },
   }
