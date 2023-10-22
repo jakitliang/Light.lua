@@ -52,7 +52,7 @@ local function MakeModule(platform)
     ['light.graphics.View'] = 'light/graphics/View.lua',
     ['light.graphics.view.ButtonView'] = 'light/graphics/view/ButtonView.lua',
     ['light.graphics.View.LabelView'] = 'light/graphics/view/LabelView.lua',
-    ['light.network.socket'] = {
+    ['light.socket'] = {
       defines = {},
       sources = {
         "light/socket/src/base64.c",
