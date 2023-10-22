@@ -52,17 +52,17 @@ local function MakeModule(platform)
     ['light.graphics.View'] = 'light/graphics/View.lua',
     ['light.graphics.view.ButtonView'] = 'light/graphics/view/ButtonView.lua',
     ['light.graphics.View.LabelView'] = 'light/graphics/view/LabelView.lua',
-    ['light.network.socket'] = {
+    ['light.socket'] = {
       defines = {},
       sources = {
-        "light/network/socket/src/base64.c",
-        "light/network/socket/src/error_number.cpp",
-        "light/network/socket/src/sha1.c",
-        "light/network/socket/src/socket.cpp",
-        "light/network/socket/src/socket_posix.cpp"
+        "light/socket/src/base64.c",
+        "light/socket/src/error_number.cpp",
+        "light/socket/src/sha1.c",
+        "light/socket/src/socket.cpp",
+        "light/socket/src/socket_posix.cpp"
       },
-      incdirs = {"light/network/socket/include", "light/network/socket/src"},
-      libraries = {},
+      incdirs = {"light/socket/include", "light/socket/src"},
+      libraries = {"stdc++"},
     },
   }
 

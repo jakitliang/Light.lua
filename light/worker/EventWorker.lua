@@ -8,7 +8,7 @@
 local Object = require('light.Object')
 local Socket = require('light.socket')
 local Worker = require('light.Worker')
-local Log = require('light.log')
+local Log = require('light.Log')
 local band, bor, bxor, bnot = bit.band, bit.bor, bit.bxor, bit.bnot
 
 local EVENT_WORKER_DEFAULT_STEP = 5
