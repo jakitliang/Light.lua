@@ -24,7 +24,7 @@ function Session:enqueue(size)
   table.insert(self.queue, size)
 end
 
-function Session:dequeue(size)
+function Session:dequeue(channel, size)
   local queue = self.queue
   local top = queue[1]
   local count = 0
@@ -46,10 +46,10 @@ function Session:dequeue(size)
     end
   end
 
-  self:completion(count)
+  self:completion(channel, count)
 end
 
-function Session:completion(count)
+function Session:completion(channel, count)
   -- Log:debug('Session:completion', count)
 end
 

@@ -18,7 +18,7 @@
 
 struct Socket {
     Byte isNonblock;
-    Byte isShutdown;
+    Int8 isShutdown;
     Byte * buffer;
     UInt32 bufferSize;
     Byte impl[128];

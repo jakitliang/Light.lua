@@ -32,9 +32,10 @@ function TCPSession:onRead(channel, buffer)
   return #buffer
 end
 
+--- @param channel TCPChannel
 function TCPSession:onWrite(channel, size)
   -- Log:debug("TCPSession:onWrite", tostring(channel), size)
-  self:dequeue(size)
+  self:dequeue(channel, size)
 end
 
 function TCPSession:onClose(channel)

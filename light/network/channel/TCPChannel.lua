@@ -176,6 +176,18 @@ function TCPChannel:getAddress()
   return self.io:getAddress()
 end
 
+function TCPChannel:shutdown(how)
+  self.io:shutdown(how)
+end
+
+function TCPChannel:isClosed()
+  return self.io:isClosed()
+end
+
+function TCPChannel:isShutdown()
+  return self.io:isShutdown()
+end
+
 Object(Channel, TCPChannel)
 TCPChannel:extends(EventWorker)
 TCPChannel.Delegate = TCPChannelDelegate

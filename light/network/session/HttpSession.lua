@@ -132,7 +132,7 @@ function HttpSession:onReadHttp(channel, input, output)
   end
 
   if connection == 'close' then
-
+    channel:shutdown(0)
   end
 
   -- output.headers['content-type'] = HttpMIME.HTML
@@ -183,7 +183,7 @@ function HttpSession:onRead(channel, buffer)
   return offset
 end
 
-function HttpSession:completion(count)
+function HttpSession:completion(channel, count)
   -- Log:debug('HttpSession:completion', count)
   local delegate = self.delegate
 
@@ -192,12 +192,16 @@ function HttpSession:completion(count)
       for i = 1, count do
         delegate('onSendCompletion', self)
       end
-      return
-    end
 
-    for i = 1, count do
-      delegate:onSendCompletion(self)
+    else
+      for i = 1, count do
+        delegate:onSendCompletion(self)
+      end
     end
+  end
+
+  if channel:isShutdown() ~= -1 then
+    channel:close()
   end
 end
 

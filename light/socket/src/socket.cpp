@@ -512,6 +512,7 @@ const struct luaL_Reg lib[] = {
 Socket * SocketNew(lua_State *L) {
     auto socket = static_cast<Socket *>(lua_newuserdata(L, sizeof(Socket)));
     Socket::Init(socket);
+    socket->isShutdown = -1;
     lua_newtable(L);
     luaL_setfuncs(L, lib, 0);
     lua_pushliteral(L, "__index");
