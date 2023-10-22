@@ -18,6 +18,9 @@
 
 struct Socket {
     Byte isNonblock;
+    Byte isShutdown;
+    Byte * buffer;
+    UInt32 bufferSize;
     Byte impl[128];
 
     static void Init(Socket * socket);

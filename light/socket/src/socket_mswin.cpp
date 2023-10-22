@@ -166,6 +166,13 @@ Int64 Socket::SendNow(Socket * socket, const void *buffer, UInt64 size) {
 
 int Socket::Shutdown(Socket *socket, int how) {
     auto impl = SocketCast(socket);
+    int ret = 0;
+
+    if (impl->fd != INVALID_SOCKET) {
+        ret = closesocket(impl->fd);
+        impl->fd = INVALID_SOCKET;
+    }
+    
     return shutdown(impl->fd, how);
 }
 

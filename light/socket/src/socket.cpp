@@ -5,6 +5,7 @@
 // @date 2023-10-01
 // @license MIT
 
+#include <string.h>
 #define LUA_LIB
 #include <lua.hpp>
 #include "socket.h"
@@ -166,13 +167,18 @@ int SocketAcceptNow(lua_State *L) {
 int SocketReceive(lua_State *L) {
     auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
     auto size = luaL_checkinteger(L, 2);
-    Byte * buffer = new Byte[size + 1]{0};
+    if (size > socket->bufferSize) {
+        delete [] socket->buffer;
+        socket->buffer = new Byte[size + 1];
+    }
 
-    auto ret = Socket::Receive(socket, buffer, size);
+    memset(socket->buffer, 0, size);
+
+    auto ret = Socket::Receive(socket, socket->buffer, size);
     int err = 0;
 
     if (ret > 0) {
-        lua_pushstring(L, reinterpret_cast<char *>(buffer));
+        lua_pushstring(L, reinterpret_cast<char *>(socket->buffer));
 
     } else if (ret == 0) {
         err = ECONNRESET;
@@ -191,13 +197,18 @@ int SocketReceive(lua_State *L) {
 int SocketReceiveNow(lua_State *L) {
     auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
     auto size = luaL_checkinteger(L, 2);
-    Byte * buffer = new Byte[size + 1]{0};
+    if (size > socket->bufferSize) {
+        delete [] socket->buffer;
+        socket->buffer = new Byte[size + 1];
+    }
 
-    auto ret = Socket::ReceiveNow(socket, buffer, size);
+    memset(socket->buffer, 0, size);
+
+    auto ret = Socket::ReceiveNow(socket, socket->buffer, size);
     int err = 0;
 
     if (ret > 0) {
-        lua_pushstring(L, reinterpret_cast<char *>(buffer));
+        lua_pushstring(L, reinterpret_cast<char *>(socket->buffer));
 
     } else if (ret == 0) {
         err = ECONNRESET;
@@ -258,6 +269,28 @@ int SocketSendNow(lua_State *L) {
 int SocketClose(lua_State *L) {
     auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
     auto ret = Socket::Close(socket);
+    int err = 0;
+
+    if (ret == 0) {
+        lua_pushinteger(L, ret);
+
+    } else {
+        err = Socket::GetError();
+        lua_pushinteger(L, err);
+    }
+
+    return 1;
+}
+
+int SocketShutdown(lua_State *L) {
+    auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
+    auto how = luaL_checkinteger(L, 2);
+    if (how > 2) {
+        how = 2;
+    }
+
+    auto ret = Socket::Shutdown(socket, how);
+    socket->isShutdown = how;
     int err = 0;
 
     if (ret == 0) {
@@ -333,6 +366,12 @@ int SocketIsClosed(lua_State *L) {
     return 1;
 }
 
+int SocketIsShutdown(lua_State *L) {
+    auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
+    lua_pushinteger(L, socket->isShutdown);
+    return 1;
+}
+
 int SocketToString(lua_State *L) {
     auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
     lua_pushfstring(L, "Socket: %p", socket);
@@ -342,6 +381,7 @@ int SocketToString(lua_State *L) {
 
 int SocketGC(lua_State *L) {
     auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
+    delete [] socket->buffer;
     Socket::Close(socket);
 
     return 0;
@@ -456,8 +496,10 @@ const struct luaL_Reg lib[] = {
         {"send", SocketSend},
         {"sendNow", SocketSendNow},
         {"close", SocketClose},
+        {"shutdown", SocketShutdown},
         {"Select", SocketSelect},
         {"isClosed", SocketIsClosed},
+        {"isShutdown", SocketIsShutdown},
         {"base64encode", SocketBase64Encode},
         {"base64decode", SocketBase64Decode},
         {"sha1hex", SocketSHA1Hex},

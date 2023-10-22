@@ -118,6 +118,7 @@ end
 --- @return nil|Protocol
 function HttpSession:onReadHttp(channel, input, output)
   local delegate = self.delegate
+  local connection = input.headers['connection'] or 'close'
 
   if input.upgrade then
     self.isWebsocket = true
@@ -128,6 +129,10 @@ function HttpSession:onReadHttp(channel, input, output)
     end
 
     return nil
+  end
+
+  if connection == 'close' then
+
   end
 
   -- output.headers['content-type'] = HttpMIME.HTML
