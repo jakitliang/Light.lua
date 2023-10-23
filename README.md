@@ -18,6 +18,12 @@ You make everything with it, such like Mobile Apps, PC games, and Web backend, e
 - **Network** Provides Http and WebSocket network communication capabilities, and TCP basic capabilities.
 - **Graphics** Privides Love2d compatible UI components.
 
+### Performance
+
+The network IO performance is near to the `nginx`
+
+![network performance](test/performance.png)
+
 ## Installation
 
 > luarocks install Light
@@ -375,6 +381,12 @@ Deployment method:
 The least thought-provoking way is to directly download the non-installation version, unzip it, drag all the executable files and dlls inside to the root directory, and start it.
 
 Run it: `D:\path...\love.exe .`
+
+### The coodinate system
+
+`light.graphics` has a coodinate system same to Android / iOS:
+
+![coodinate system](test/ui.webp)
 
 ### Basic
 
