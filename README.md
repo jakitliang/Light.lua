@@ -1,3 +1,5 @@
+![Light.lua](Light.png)
+
 # Light.lua
 
 > If I were the shore, bright &amp; magnanimous.

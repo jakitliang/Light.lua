@@ -1,3 +1,5 @@
+![Light.lua](Light.png)
+
 # 灯.lua
 
 > 若我即是彼方，光明坦荡
