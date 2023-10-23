@@ -1,4 +1,4 @@
-![Light.lua](Light.png)
+<img src="./Light.png" width="192" height="192" align="center" />
 
 # Light.lua
 
