@@ -1,4 +1,4 @@
-![Light.lua](Light.png){: width="25%"}
+![Light.lua](Light.png|width=128)
 
 # 灯.lua
 
