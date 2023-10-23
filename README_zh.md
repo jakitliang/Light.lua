@@ -1,4 +1,4 @@
-<img src="./Light.png" width="192" height="192" align="center" />
+<img src="./Light.png" width="192" height="152" />
 
 # 灯.lua
 
