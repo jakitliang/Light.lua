@@ -1,4 +1,4 @@
-![Light.lua](Light.png = 250x250)
+![Light.lua](Light.png=250x250)
 
 # 灯.lua
 
