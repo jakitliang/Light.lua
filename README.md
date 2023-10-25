@@ -169,18 +169,23 @@ Provides cross-platform socket support:
 
 > light.socket.TCP -> TCP
 
-Sample:
+Sample (Client):
 
 ```lua
 local s = light.socket.TCP()
-s:connect('localhost', 8080)
+s:connect('127.0.0.1', 8080)
 ```
 
 ### UDP
 
 > light.socket.UDP -> UDP
 
-**UDP said it will coming soon**
+Sample (Client):
+
+```lua
+local s = light.socket.UDP()
+s:connect('127.0.0.1', 8080)
+```
 
 ### Base64
 
@@ -231,6 +236,34 @@ Users can operate in the following ways:
 - TCPChannel:accept()
 - TCPChannel:acceptNow() -- NonBlock
 - TCPChannel:close()
+
+#### UDPChannel
+
+> light.network.channel.UDPChannel -> UDPChannel
+
+UDP channel can let you DIY your network transfer diagram.
+
+And this is the client side.
+
+```lua
+local client = UDPChannel('127.0.0.1', 3001) -- connect
+client:read(8)
+client:send('hello', 5)
+client:close()
+```
+
+#### UDPServerChannel
+
+> light.network.channel.UDPServerChannel -> UDPServerChannel
+
+UDP server channel works as the server side of UDPChannel.
+
+```lua
+local client = UDPServerChannel('127.0.0.1', 3001) -- bind
+client:read(8)
+client:send('hello', 5)
+client:close()
+```
 
 ### Protocol
 

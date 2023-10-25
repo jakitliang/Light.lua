@@ -171,18 +171,27 @@ Log:debug('debug')
 
 > light.socket.TCP -> TCP
 
-示例代码：
+示例代码（客户端）：
 
 ```lua
-local s = light.socket.TCP()
-s:connect('localhost', 8080)
+local c = light.socket.TCP()
+c:connect('127.0.0.1', 8080)
+c:send('hello tcp', 9)
+c:sendNow('hello tcp', 9) -- 非阻塞
 ```
 
 ### UDP
 
 > light.socket.UDP -> UDP
 
-**尽快提供 UDP 方面的支持**
+示例代码（客户端）：
+
+```lua
+local c = light.socket.UDP()
+c:connectNow('127.0.0.1', 8080) -- 非阻塞
+c:send('hello udp', 9)
+c:sendNow('hello tcp', 9) -- 非阻塞
+```
 
 ### Base64
 
@@ -210,6 +219,8 @@ s:connect('localhost', 8080)
 
 > light.network.channel.TCPChannel -> TCPChannel
 
+**此为客户端**
+
 TCP 频道为最基本的 TCP 消息发送管道，用户可通过下列方式操作：
 
 - TCPChannel:connect('host', port)
@@ -224,11 +235,47 @@ TCP 频道为最基本的 TCP 消息发送管道，用户可通过下列方式�
 
 > light.network.channel.TCPServerChannel -> TCPServerChannel
 
+**此为服务端**
+
 TCP 频道为 TCP 服务类应用的管道，用户可通过下列方式操作：
 
 - TCPChannel:accept()
 - TCPChannel:acceptNow() -- 非阻塞接纳
 - TCPChannel:close()
+
+#### UDP 频道
+
+> light.network.channel.UDPChannel -> UDPChannel
+
+UDP 频道提供自定义网络报文协议能力的管道。
+
+**此为客户端**
+
+示例代码：
+
+```lua
+local client = UDPChannel('127.0.0.1', 3001) -- connect
+client:read(8)
+client:send('hello', 5)
+client:close()
+```
+
+#### UDP 服务频道
+
+> light.network.channel.UDPServerChannel -> UDPServerChannel
+
+UDP 服务频道 提供给其它 UDP 频道 进行连接。
+
+**此为服务端**
+
+示例代码：
+
+```lua
+local client = UDPServerChannel('127.0.0.1', 3001) -- bind
+client:read(8)
+client:send('hello', 5)
+client:close()
+```
 
 ### 协议
 
