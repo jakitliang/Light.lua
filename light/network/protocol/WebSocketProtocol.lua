@@ -16,6 +16,7 @@ local ParseStatus = Protocol.ParseStatus
 local Pack = string.pack or function (...) return love.data.pack('string', ...) end
 ---@diagnostic disable-next-line: deprecated
 local Unpack = string.unpack or function (...) return love.data.unpack(...) end
+local bit = require('light.bit')
 local bnot = bit.bnot
 local band, bor, bxor = bit.band, bit.bor, bit.bxor
 local lshift, rshift, rol = bit.lshift, bit.rshift, bit.rol
