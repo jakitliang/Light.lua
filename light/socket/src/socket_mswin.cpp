@@ -14,7 +14,6 @@
 #include "error_number.h"
 
 static WSADATA wsaData;
-static WORD wVersionRequested = MAKEWORD(2, 2);
 static bool wsaStartUp = false;
 static SOCKET defaultSocket;
 
@@ -25,10 +24,10 @@ void onExit() {
 
 bool checkStart() {
     if (!wsaStartUp) {
-        int err = WSAStartup(wVersionRequested, &wsaData);
+        int err = WSAStartup(MAKEWORD(2, 2), &wsaData);
         if (err != 0) return false;
         atexit(onExit);
-        defaultSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+        defaultSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
         wsaStartUp = true;
     }
 
@@ -155,25 +154,11 @@ Int64 Socket::ReceiveNow(Socket * socket, void *buffer, UInt64 size) {
 }
 
 Int64 Socket::ReceiveFrom(Socket *socket, const char *address, UInt64 port, void *buffer, UInt64 size) {
-    auto impl = SocketCast(socket);
-    sockaddr_in addr{};
-    impl->addr.sin_family =  AF_INET;
-    impl->addr.sin_addr.s_addr = inet_addr(address);
-    impl->addr.sin_port = htons(port);
-    int len = sizeof(addr);
-    return recvfrom(impl->fd, reinterpret_cast<char *>(buffer), size, 0,
-             reinterpret_cast<sockaddr *>(&addr), &len);
+    return 0;
 }
 
 Int64 Socket::ReceiveFromNow(Socket *socket, const char *address, UInt64 port, void *buffer, UInt64 size) {
-    auto impl = SocketCast(socket);
-    sockaddr_in addr{};
-    impl->addr.sin_family =  AF_INET;
-    impl->addr.sin_addr.s_addr = inet_addr(address);
-    impl->addr.sin_port = htons(port);
-    int len = sizeof(addr);
-    return recvfrom(impl->fd, reinterpret_cast<char *>(buffer), size, MSG_PARTIAL,
-             reinterpret_cast<sockaddr *>(&addr), &len);
+    return 0;
 }
 
 Int64 Socket::Send(Socket * socket, const void *buffer, UInt64 size) {
@@ -187,25 +172,11 @@ Int64 Socket::SendNow(Socket * socket, const void *buffer, UInt64 size) {
 }
 
 Int64 Socket::SendTo(Socket *socket, const char *address, UInt64 port, const void *buffer, UInt64 size) {
-    auto impl = SocketCast(socket);
-    sockaddr_in addr{};
-    impl->addr.sin_family =  AF_INET;
-    impl->addr.sin_addr.s_addr = inet_addr(address);
-    impl->addr.sin_port = htons(port);
-    int len = sizeof(addr);
-    return sendto(impl->fd, reinterpret_cast<const char *>(buffer), size, 0,
-           reinterpret_cast<sockaddr *>(&addr), len);
+    return 0;
 }
 
 Int64 Socket::SendToNow(Socket *socket, const char *address, UInt64 port, const void *buffer, UInt64 size) {
-    auto impl = SocketCast(socket);
-    sockaddr_in addr{};
-    impl->addr.sin_family =  AF_INET;
-    impl->addr.sin_addr.s_addr = inet_addr(address);
-    impl->addr.sin_port = htons(port);
-    int len = sizeof(addr);
-    return sendto(impl->fd, reinterpret_cast<const char *>(buffer), size, MSG_PARTIAL,
-                  reinterpret_cast<sockaddr *>(&addr), len);
+    return 0;
 }
 
 int Socket::Shutdown(Socket *socket, int how) {
