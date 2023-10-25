@@ -6,7 +6,7 @@
 --- @license MIT
 
 local Object = require('light.Object')
-local Socket = require('light.socket')
+local socket = require('light.socket')
 local Worker = require('light.Worker')
 local Log = require('light.Log')
 local bit = require('light.bit')
@@ -128,7 +128,7 @@ function EventWorker:handle(...)
   -- Log:debug('r', #readIO)
   -- Log:debug('w', #writeIO)
   --- @type any[], any[], string
-  readIO, writeIO, err = Socket.Select(readIO, writeIO, self.step)
+  readIO, writeIO, err = socket.Select(readIO, writeIO, self.step)
 
   local channel, ret
   for i = 1, #readIO do

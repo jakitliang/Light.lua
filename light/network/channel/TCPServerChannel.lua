@@ -6,7 +6,7 @@
 --- @license MIT
 
 local Object = require('light.Object')
-local Socket = require('light.socket')
+local socket = require('light.socket')
 local TCPChannel = require('light.network.channel.TCPChannel')
 local EventWorker = require('light.worker.EventWorker')
 local Log = require('light.Log')
@@ -27,7 +27,7 @@ TCPServerChannelDelegate:extends(TCPChannel.Delegate)
 function TCPServerChannelDelegate:onAccept(tcpServerChannel, tcpChannel) end
 
 local function TCPServerChannelInitIO(self, host, port, count)
-  local io = Socket.TCP()
+  local io = socket.TCP()
 
   io:bind(host, port)
   io:listen(count)
@@ -75,10 +75,10 @@ function TCPServerChannel:onReadEvent(event)
 
     return EventWorker.Handle.CONTINUE
 
-  elseif err == Socket.Errno.EAGAIN then
+  elseif err == socket.Errno.EAGAIN then
     return EventWorker.Handle.CONTINUE
 
-  elseif err == Socket.Errno.EWOULDBLOCK then
+  elseif err == socket.Errno.EWOULDBLOCK then
     return EventWorker.Handle.CONTINUE
   end
 

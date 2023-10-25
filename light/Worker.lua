@@ -6,7 +6,7 @@
 --- @license MIT
 
 local Object = require('light.Object')
-local Socket = require('light.socket')
+local socket = require('light.socket')
 
 --- @class Worker : Object
 local Worker = {}
@@ -27,7 +27,7 @@ end
 function Worker:join()
   local count = 0
   while self.isRunning and count < 1000 do
-    Socket.Select(nil, nil, 0.05)
+    socket.Select(nil, nil, 0.05)
   end
 end
 

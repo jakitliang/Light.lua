@@ -6,13 +6,13 @@
 --- @license MIT
 
 local Object = require('light.Object')
-local Socket = require('light.socket')
 local TCPSession = require('light.network.session.TCPSession')
 local HttpProtocol = require('light.network.protocol.HttpProtocol')
 local HttpMethod = HttpProtocol.HttpMethod
 local HttpStatus = HttpProtocol.HttpStatus
 local HttpMIME = HttpProtocol.HttpMIME
 local WebSocketProtocol = require('light.network.protocol.WebSocketProtocol')
+local socket = require('light.socket')
 local Log = require('light.Log')
 
 --- @class HttpSession : TCPSession
@@ -68,7 +68,7 @@ end
 local function HttpUpgradeServer(input, output)
   local websocketKey = input.headers["sec-websocket-key"]
   local securityKey = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11'
-  local digestKey = Socket.base64encode(Socket.sha1(websocketKey .. securityKey))
+  local digestKey = socket.base64encode(socket.sha1(websocketKey .. securityKey))
 
   output.statusCode = 101
   output.headers["connection"] = "keep-alive, Upgrade"

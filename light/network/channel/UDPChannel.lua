@@ -6,7 +6,7 @@
 --- @license MIT
 
 local Object = require('light.Object')
-local Socket = require('light.socket')
+local socket = require('light.socket')
 local Channel = require('light.network.Channel')
 local EventWorker = require('light.worker.EventWorker')
 local Log = require('light.Log')
@@ -26,7 +26,7 @@ local UDPChannelDelegate = Object()
 UDPChannelDelegate:extends(Channel.Delegate)
 
 local function UDPChannelInitIO(self, host, port, async)
-  local io = Socket.UDP()
+  local io = socket.UDP()
 
   if async then
     io:connectNow(host, port)
@@ -116,7 +116,7 @@ function UDPChannel:onReadEvent(event)
 
   local data, err = self:readNow()
 
-  if err == Socket.OK then
+  if err == socket.OK then
     self:increase('i', data)
     if self.delegate then
       local len = self.delegate:onRead(self, self.buffer.i)
@@ -125,11 +125,11 @@ function UDPChannel:onReadEvent(event)
 
     return EventWorker.Handle.CONTINUE
 
-  elseif err == Socket.Errno.EAGAIN then
+  elseif err == socket.Errno.EAGAIN then
     -- UDPChannel read pending
     return EventWorker.Handle.CONTINUE
 
-  elseif err == Socket.Errno.EWOULDBLOCK then
+  elseif err == socket.Errno.EWOULDBLOCK then
     -- UDPChannel read pending
     return EventWorker.Handle.CONTINUE
   end
@@ -146,7 +146,7 @@ function UDPChannel:onWriteEvent(event)
 
   local len, err = self:writeNow(self.buffer.o, #self.buffer.o)
 
-  if err == Socket.OK then
+  if err == socket.OK then
     self:decrease('o', len)
 
     if self.delegate then
@@ -159,11 +159,11 @@ function UDPChannel:onWriteEvent(event)
 
     return EventWorker.Handle.CONTINUE
 
-  elseif err == Socket.Errno.EAGAIN then
+  elseif err == socket.Errno.EAGAIN then
     -- UDPChannel write pending
     return EventWorker.Handle.CONTINUE
 
-  elseif err == Socket.Errno.EWOULDBLOCK then
+  elseif err == socket.Errno.EWOULDBLOCK then
     -- UDPChannel write pending
     return EventWorker.Handle.CONTINUE
   end
