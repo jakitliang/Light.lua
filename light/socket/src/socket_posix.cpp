@@ -127,6 +127,28 @@ Int64 Socket::ReceiveNow(Socket * socket, void *buffer, UInt64 size) {
     return recv(impl->fd, buffer, size, MSG_DONTWAIT);
 }
 
+Int64 Socket::ReceiveFrom(Socket *socket, const char *address, UInt64 port, void *buffer, UInt64 size) {
+    auto impl = SocketCast(socket);
+    sockaddr_in addr{};
+    impl->addr.sin_family =  AF_INET;
+    impl->addr.sin_addr.s_addr = inet_addr(address);
+    impl->addr.sin_port = htons(port);
+    int len = sizeof(addr);
+    return recvfrom(impl->fd, buffer, size, 0,
+                    reinterpret_cast<sockaddr *>(&addr), &len);
+}
+
+Int64 Socket::ReceiveFromNow(Socket *socket, const char *address, UInt64 port, void *buffer, UInt64 size) {
+    auto impl = SocketCast(socket);
+    sockaddr_in addr{};
+    impl->addr.sin_family =  AF_INET;
+    impl->addr.sin_addr.s_addr = inet_addr(address);
+    impl->addr.sin_port = htons(port);
+    int len = sizeof(addr);
+    return recvfrom(impl->fd, buffer, size, MSG_DONTWAIT,
+                    reinterpret_cast<sockaddr *>(&addr), &len);
+}
+
 Int64 Socket::Send(Socket * socket, const void *buffer, UInt64 size) {
     auto impl = SocketCast(socket);
     return send(impl->fd, buffer, size, 0);
@@ -135,6 +157,28 @@ Int64 Socket::Send(Socket * socket, const void *buffer, UInt64 size) {
 Int64 Socket::SendNow(Socket * socket, const void *buffer, UInt64 size) {
     auto impl = SocketCast(socket);
     return send(impl->fd, buffer, size, MSG_DONTWAIT);
+}
+
+Int64 Socket::SendTo(Socket *socket, const char *address, UInt64 port, const void *buffer, UInt64 size) {
+    auto impl = SocketCast(socket);
+    sockaddr_in addr{};
+    impl->addr.sin_family =  AF_INET;
+    impl->addr.sin_addr.s_addr = inet_addr(address);
+    impl->addr.sin_port = htons(port);
+    int len = sizeof(addr);
+    return sendto(impl->fd, buffer, size, 0,
+                  reinterpret_cast<sockaddr *>(&addr), len);
+}
+
+Int64 Socket::SendToNow(Socket *socket, const char *address, UInt64 port, const void *buffer, UInt64 size) {
+    auto impl = SocketCast(socket);
+    sockaddr_in addr{};
+    impl->addr.sin_family =  AF_INET;
+    impl->addr.sin_addr.s_addr = inet_addr(address);
+    impl->addr.sin_port = htons(port);
+    int len = sizeof(addr);
+    return sendto(impl->fd, buffer, size, MSG_DONTWAIT,
+                  reinterpret_cast<sockaddr *>(&addr), len);
 }
 
 int Socket::Shutdown(Socket *socket, int how) {

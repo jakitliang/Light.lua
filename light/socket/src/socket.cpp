@@ -224,6 +224,70 @@ int SocketReceiveNow(lua_State *L) {
     return 2;
 }
 
+int SocketReceiveFrom(lua_State *L) {
+    auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
+    auto size = luaL_checkinteger(L, 2);
+    auto address = luaL_checkstring(L, 3);
+    auto port = luaL_checkinteger(L, 4);
+    if (size > socket->bufferSize) {
+        delete [] socket->buffer;
+        socket->buffer = new Byte[size + 1];
+    }
+
+    memset(socket->buffer, 0, size);
+
+    auto ret = Socket::ReceiveFrom(socket, address, port, socket->buffer, size);
+    int err = 0;
+
+    if (ret > 0) {
+        lua_pushstring(L, reinterpret_cast<char *>(socket->buffer));
+
+    } else if (ret == 0) {
+        err = ECONNRESET;
+        lua_pushstring(L, "");
+
+    } else {
+        err = Socket::GetError();
+        lua_pushstring(L, "");
+    }
+
+    lua_pushinteger(L, err);
+
+    return 2;
+}
+
+int SocketReceiveFromNow(lua_State *L) {
+    auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
+    auto size = luaL_checkinteger(L, 2);
+    auto address = luaL_checkstring(L, 3);
+    auto port = luaL_checkinteger(L, 4);
+    if (size > socket->bufferSize) {
+        delete [] socket->buffer;
+        socket->buffer = new Byte[size + 1];
+    }
+
+    memset(socket->buffer, 0, size);
+
+    auto ret = Socket::ReceiveFromNow(socket, address, port, socket->buffer, size);
+    int err = 0;
+
+    if (ret > 0) {
+        lua_pushstring(L, reinterpret_cast<char *>(socket->buffer));
+
+    } else if (ret == 0) {
+        err = ECONNRESET;
+        lua_pushstring(L, "");
+
+    } else {
+        err = Socket::GetError();
+        lua_pushstring(L, "");
+    }
+
+    lua_pushinteger(L, err);
+
+    return 2;
+}
+
 int SocketSend(lua_State *L) {
     auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
     auto buffer = luaL_checkstring(L, 2);
@@ -251,6 +315,52 @@ int SocketSendNow(lua_State *L) {
     auto size = luaL_checkinteger(L, 3);
 
     auto ret = Socket::SendNow(socket, buffer, size);
+    int err = 0;
+
+    if (ret >= 0) {
+        lua_pushinteger(L, ret);
+
+    } else {
+        err = Socket::GetError();
+        lua_pushinteger(L, 0);
+    }
+
+    lua_pushinteger(L, err);
+
+    return 2;
+}
+
+int SocketSendTo(lua_State *L) {
+    auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
+    auto buffer = luaL_checkstring(L, 2);
+    auto size = luaL_checkinteger(L, 3);
+    auto address = luaL_checkstring(L, 4);
+    auto port = luaL_checkinteger(L, 5);
+
+    auto ret = Socket::SendTo(socket, address, port, buffer, size);
+    int err = 0;
+
+    if (ret >= 0) {
+        lua_pushinteger(L, ret);
+
+    } else {
+        err = Socket::GetError();
+        lua_pushinteger(L, 0);
+    }
+
+    lua_pushinteger(L, err);
+
+    return 2;
+}
+
+int SocketSendToNow(lua_State *L) {
+    auto socket = static_cast<Socket *>(lua_touserdata(L, 1));
+    auto buffer = luaL_checkstring(L, 2);
+    auto size = luaL_checkinteger(L, 3);
+    auto address = luaL_checkstring(L, 4);
+    auto port = luaL_checkinteger(L, 5);
+
+    auto ret = Socket::SendToNow(socket, address, port, buffer, size);
     int err = 0;
 
     if (ret >= 0) {
@@ -493,8 +603,12 @@ const struct luaL_Reg lib[] = {
         {"acceptNow", SocketAcceptNow},
         {"receive", SocketReceive},
         {"receiveNow", SocketReceiveNow},
+        {"receiveFrom", SocketReceiveFrom},
+        {"receiveFromNow", SocketReceiveFromNow},
         {"send", SocketSend},
         {"sendNow", SocketSendNow},
+        {"sendTo", SocketSendTo},
+        {"sendToNow", SocketSendToNow},
         {"close", SocketClose},
         {"shutdown", SocketShutdown},
         {"Select", SocketSelect},

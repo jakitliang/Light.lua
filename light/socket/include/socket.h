@@ -42,9 +42,13 @@ struct Socket {
 
     static Int64 Receive(Socket * socket, void *buffer, UInt64 size);
     static Int64 ReceiveNow(Socket * socket, void *buffer, UInt64 size);
+    static Int64 ReceiveFrom(Socket * socket, const char *address, UInt64 port, void *buffer, UInt64 size);
+    static Int64 ReceiveFromNow(Socket * socket, const char *address, UInt64 port, void *buffer, UInt64 size);
 
     static Int64 Send(Socket * socket, const void *buffer, UInt64 size);
     static Int64 SendNow(Socket * socket, const void *buffer, UInt64 size);
+    static Int64 SendTo(Socket * socket, const char *address, UInt64 port, const void *buffer, UInt64 size);
+    static Int64 SendToNow(Socket * socket, const char *address, UInt64 port, const void *buffer, UInt64 size);
 
     static int Shutdown(Socket * socket, int how);
 
