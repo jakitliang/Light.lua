@@ -5,22 +5,37 @@
 --- @date 2023-09-16
 --- @license MIT
 
--- Should help your self change the library
--- require('compat53')
--- require('love.data')
-
+local Log = require('light.Log')
 local Object = require('light.Object')
 local Protocol = require('light.network.Protocol')
 local ParseStatus = Protocol.ParseStatus
----@diagnostic disable-next-line: deprecated
-local Pack = string.pack or function (...) return love.data.pack('string', ...) end
----@diagnostic disable-next-line: deprecated
-local Unpack = string.unpack or function (...) return love.data.unpack(...) end
 local bit = require('light.bit')
 local bnot = bit.bnot
 local band, bor, bxor = bit.band, bit.bor, bit.bxor
 local lshift, rshift, rol = bit.lshift, bit.rshift, bit.rol
-local Log = require('light.Log')
+
+-- Should help your self change the library
+-- require('compat53')
+-- require('love.data')
+if not rawget(string, 'pack') then
+  Log:debug("Try require compat53")
+  local ret = pcall(require, 'compat53')
+
+  if not ret then
+    Log:debug("Try require love.data")
+    ret = pcall(require, 'love.data')
+  end
+
+  if not ret then
+    Log:info("Load module 'compat53' or 'love' failed.")
+    os.exit(0)
+  end
+end
+
+---@diagnostic disable-next-line: deprecated
+local Pack = string.pack or function (...) return love.data.pack('string', ...) end
+---@diagnostic disable-next-line: deprecated
+local Unpack = string.unpack or function (...) return love.data.unpack(...) end
 
 local ParseState = {
   PARSE_OPERATION = ParseStatus.BEGIN,

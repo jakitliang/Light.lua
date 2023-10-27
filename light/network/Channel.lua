@@ -23,7 +23,10 @@ local ChannelDelegate = {}
 
 --- @param channel Channel
 --- @param buffer string
-function ChannelDelegate:onRead(channel, buffer) end
+--- @return integer
+function ChannelDelegate:onRead(channel, buffer)
+  return 0
+end
 
 --- @param channel Channel
 --- @param size integer
@@ -86,13 +89,15 @@ function Channel:decrease(target, size)
   if size <= 0 then
     return
   end
+  local buffer = self.buffer[target]
+  local len = #buffer
 
-  if size >= self.buffer[target]:len() then
+  if size >= len then
     self.buffer[target] = ''
     return
   end
 
-  self.buffer[target] = self.buffer[target]:sub(size + 1, self.buffer[target]:len())
+  self.buffer[target] = buffer:sub(size + 1, len)
 end
 
 Object(Channel)

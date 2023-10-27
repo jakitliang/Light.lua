@@ -1,10 +1,11 @@
 --- Light.lua
---- Light up your way to the internet
+--- If I were the shore, bright & magnanimous.
 --- @module 'TCPChannel'
 --- @author Jakit Liang 泊凛
 --- @date 2023-10-16
 --- @license MIT
 
+local Light = require('Light')
 local Object = require('light.Object')
 local socket = require('light.socket')
 local Channel = require('light.network.Channel')
@@ -19,7 +20,7 @@ local Log = require('light.Log')
 --- @field delegate TCPChannelDelegate
 --- @overload fun(host: string, port: integer, delegate?: TCPChannelDelegate, socket):self
 local TCPChannel = {}
-local TCPChannelDefaultReceiveSize = 512 * 1024
+local TCPChannelDefaultReceiveSize = Light.network.DEFAULT_BUFFER_SIZE
 
 --- @class TCPChannelDelegate : ChannelDelegate
 local TCPChannelDelegate = Object()
@@ -118,9 +119,19 @@ function TCPChannel:onReadEvent(event)
 
   if err == socket.OK then
     self:increase('i', data)
+    local len = 0
+    local buffer = self.buffer
+
     if self.delegate then
-      local len = self.delegate:onRead(self, self.buffer.i)
-      self:decrease('i', type(len) == 'number' and len or 0)
+      repeat
+        len = self.delegate:onRead(self, buffer.i)
+        self:decrease('i', len)
+
+        if #buffer.i == 0 then
+          break
+        end
+
+      until len == 0
     end
 
     return EventWorker.Handle.CONTINUE
@@ -197,6 +208,9 @@ end
 function TCPChannel:isShutdown()
   return self.io:isShutdown()
 end
+
+rawset(TCPChannel --[[@as table]], 'getDefaultReceiveSize', getDefaultReceiveSize)
+rawset(TCPChannel --[[@as table]], 'setDefaultReceiveSize', setDefaultReceiveSize)
 
 Object(Channel, TCPChannel)
 TCPChannel:extends(EventWorker)

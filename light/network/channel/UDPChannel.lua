@@ -5,6 +5,7 @@
 --- @date 2023-10-16
 --- @license MIT
 
+local Light = require('Light')
 local Object = require('light.Object')
 local socket = require('light.socket')
 local Channel = require('light.network.Channel')
@@ -19,7 +20,7 @@ local Log = require('light.Log')
 --- @field delegate UDPChannelDelegate
 --- @overload fun(host: string, port: integer, delegate?: UDPChannelDelegate, socket):self
 local UDPChannel = {}
-local UDPChannelDefaultReceiveSize = 512 * 1024
+local UDPChannelDefaultReceiveSize = Light.network.DEFAULT_BUFFER_SIZE
 
 --- @class UDPChannelDelegate : ChannelDelegate
 local UDPChannelDelegate = Object()
@@ -111,26 +112,36 @@ end
 --- @param event EventWorker
 --- @return integer
 function UDPChannel:onReadEvent(event)
-  -- Log:debug('UDPChannel:onReadEvent', tostring(self))
+  -- Log:debug('TCPChannel:onReadEvent', tostring(self))
   self.active = os.time()
 
   local data, err = self:readNow()
 
   if err == socket.OK then
     self:increase('i', data)
+    local len = 0
+    local buffer = self.buffer
+
     if self.delegate then
-      local len = self.delegate:onRead(self, self.buffer.i)
-      self:decrease('i', type(len) == 'number' and len or 0)
+      repeat
+        len = self.delegate:onRead(self, buffer.i)
+        self:decrease('i', len)
+
+        if #buffer.i == 0 then
+          break
+        end
+
+      until len == 0
     end
 
     return EventWorker.Handle.CONTINUE
 
   elseif err == socket.Errno.EAGAIN then
-    -- UDPChannel read pending
+    -- TCPChannel read pending
     return EventWorker.Handle.CONTINUE
 
   elseif err == socket.Errno.EWOULDBLOCK then
-    -- UDPChannel read pending
+    -- TCPChannel read pending
     return EventWorker.Handle.CONTINUE
   end
 

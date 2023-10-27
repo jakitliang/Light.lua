@@ -172,13 +172,13 @@ int SocketReceive(lua_State *L) {
         socket->buffer = new Byte[size + 1];
     }
 
-    memset(socket->buffer, 0, size);
+    memset(socket->buffer, 0, size + 1);
 
     auto ret = Socket::Receive(socket, socket->buffer, size);
     int err = 0;
 
     if (ret > 0) {
-        lua_pushstring(L, reinterpret_cast<char *>(socket->buffer));
+        lua_pushlstring(L, reinterpret_cast<char *>(socket->buffer), ret);
 
     } else if (ret == 0) {
         err = ECONNRESET;
@@ -202,13 +202,13 @@ int SocketReceiveNow(lua_State *L) {
         socket->buffer = new Byte[size + 1];
     }
 
-    memset(socket->buffer, 0, size);
+    memset(socket->buffer, 0, size + 1);
 
     auto ret = Socket::ReceiveNow(socket, socket->buffer, size);
     int err = 0;
 
     if (ret > 0) {
-        lua_pushstring(L, reinterpret_cast<char *>(socket->buffer));
+        lua_pushlstring(L, reinterpret_cast<char *>(socket->buffer), ret);
 
     } else if (ret == 0) {
         err = ECONNRESET;

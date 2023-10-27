@@ -3,11 +3,14 @@ io.stdout:setvbuf('no')
 
 package.path = "..\\?.lua;" .. "" .. package.path
 
+local Log = require('light.Log')
+Log.level = Log.Level.DEBUG
+
 local HttpSession = require('light.network.session.HttpSession')
 local WebSocketProtocol = require('light.network.protocol.WebSocketProtocol')
 
 local s = HttpSession('127.0.0.1', 8080, function (action, ...)
-  print('action:', action)
+  Log:debug('action:', action)
   if action == 'onHttp' then
     --- @type HttpSession, HttpProtocol, HttpProtocol
     local self, input, output = ...
@@ -17,7 +20,7 @@ local s = HttpSession('127.0.0.1', 8080, function (action, ...)
   elseif action == 'onWebSocket' then
     --- @type HttpSession, WebSocketProtocol, WebSocketProtocol
     local self, input, output = ...
-    print('onWebSocket:', input.payload)
+    Log:debug('onWebSocket:', input.payload)
   end
 
   return nil
