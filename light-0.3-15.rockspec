@@ -1,5 +1,5 @@
 package = "Light"
-version = "0.3-13"
+version = "0.3-15"
 
 source = {
   url = "git://github.com/jakitliang/Light.git",
@@ -18,6 +18,7 @@ dependencies = {
 
 local function MakeModule(platform)
   local modules = {
+    ['Light'] = 'Light.lua',
     ['light.Object'] = 'light/Object.lua',
     ['light.Log'] = 'light/Log.lua',
     ['light.Worker'] = 'light/Worker.lua',
@@ -96,6 +97,7 @@ local platforms = {
         ['light.socket'] = "socket.dll"
       },
       lua = {
+        ['Light'] = 'Light.lua',
         ['light.Object'] = 'light/Object.lua',
         ['light.Log'] = 'light/Log.lua',
         ['light.Worker'] = 'light/Worker.lua',
